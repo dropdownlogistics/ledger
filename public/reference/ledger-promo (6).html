@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger — AuditForge Verified</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+  :root {
+    --navy: #0D1B2A;
+    --card: #10202f;
+    --card2: #0f1e2c;
+    --cream: #F5F1EB;
+    --crimson: #B23531;
+    --amber: #C49A3C;
+    --green: #4A9E6B;
+    --blue: #6B9DC2;
+    --violet: #8a6cc9;
+    --steel: #6B7B8D;
+    --border: rgba(245,241,235,0.07);
+    --border-amber: rgba(196,154,60,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Source Serif 4', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(178,53,49,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(196,154,60,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-eyebrow-line {
+    width: 40px; height: 1px;
+    background: var(--crimson);
+  }
+
+  .hero-eyebrow-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--crimson);
+  }
+
+  .hero-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 1.0;
+    text-align: center;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--amber);
+    font-weight: 300;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .hero-sub {
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.6);
+    text-align: center;
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .hero-distinction {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .distinction-item {
+    text-align: center;
+  }
+
+  .distinction-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 4px;
+  }
+
+  .distinction-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cream);
+  }
+
+  .distinction-sep {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+  }
+
+  /* ── THE CARD ── */
+  .card-section {
+    padding: 80px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .section-body {
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.55);
+    text-align: center;
+    max-width: 520px;
+    line-height: 1.75;
+  }
+
+  /* ── LEDGER CARD MOCK ── */
+  .ledger-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--crimson);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(178,53,49,0.1);
+    position: relative;
+  }
+
+  .ledger-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 120px;
+    background: radial-gradient(ellipse at top left, rgba(178,53,49,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .card-header {
+    padding: 28px 28px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .card-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--crimson), #8B1A17);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--cream);
+    flex-shrink: 0;
+  }
+
+  .card-identity {
+    flex: 1;
+    padding-left: 14px;
+  }
+
+  .card-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 3px;
+  }
+
+  .card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--steel);
+    letter-spacing: 0.05em;
+  }
+
+  .verified-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(74,158,107,0.12);
+    border: 1px solid rgba(74,158,107,0.3);
+    border-radius: 20px;
+    padding: 5px 10px;
+    flex-shrink: 0;
+  }
+
+  .verified-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  .verified-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .card-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 28px;
+  }
+
+  .card-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  .stat-cell {
+    background: var(--card);
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+
+  .card-domains {
+    padding: 0 28px 16px;
+  }
+
+  .domains-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 10px;
+  }
+
+  .domain-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .domain-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .card-frameworks {
+    padding: 0 28px 20px;
+  }
+
+  .framework-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .framework-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: rgba(245,241,235,0.05);
+    border: 1px solid var(--border);
+    color: var(--steel);
+  }
+
+  .card-footer {
+    padding: 14px 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-footer-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(245,241,235,0.2);
+    letter-spacing: 0.08em;
+  }
+
+  .card-footer-brand span {
+    color: var(--crimson);
+    font-weight: 700;
+  }
+
+  .card-share {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--amber);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+
+  /* ── STRENGTH TOKENS ── */
+  .tokens-row {
+    display: flex;
+    gap: 6px;
+    padding: 0 28px 20px;
+    flex-wrap: wrap;
+  }
+
+  .token {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── THREE COLUMNS ── */
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+  }
+
+  .feature-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .feature-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .feature-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.5);
+    line-height: 1.7;
+  }
+
+  /* ── THE MOAT ── */
+  .moat-section {
+    background: rgba(178,53,49,0.05);
+    border: 1px solid rgba(178,53,49,0.15);
+    border-radius: 16px;
+    padding: 48px 56px;
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .moat-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .moat-headline em {
+    color: var(--crimson);
+    font-style: italic;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+  }
+
+  .moat-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.55);
+    line-height: 1.75;
+  }
+
+  .moat-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .moat-stat {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    background: rgba(245,241,235,0.03);
+    border-radius: 8px;
+    border-left: 2px solid var(--crimson);
+  }
+
+  .moat-stat-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--cream);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 60px;
+  }
+
+  .moat-stat-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--steel);
+    line-height: 1.6;
+    padding-top: 4px;
+  }
+
+  /* ── FLYWHEEL ── */
+  .flywheel {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .flywheel-step {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .flywheel-step:last-child {
+    border-bottom: none;
+  }
+
+  .flywheel-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(196,154,60,0.1);
+    border: 1px solid rgba(196,154,60,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amber);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .flywheel-content {}
+
+  .flywheel-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .flywheel-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.5);
+    line-height: 1.7;
+  }
+
+  /* ── BUSINESS MODEL ── */
+  .biz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .biz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+  }
+
+  .biz-card.featured {
+    border-color: rgba(196,154,60,0.3);
+    background: rgba(196,154,60,0.04);
+    grid-column: 1 / -1;
+  }
+
+  .biz-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .biz-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .biz-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.5);
+    line-height: 1.7;
+  }
+
+  /* ── GENERALIZATION ── */
+  .gen-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .gen-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .gen-card.active {
+    border-color: rgba(178,53,49,0.3);
+    background: rgba(178,53,49,0.05);
+  }
+
+  .gen-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .gen-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .gen-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--steel);
+  }
+
+  .gen-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    margin-top: 10px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 80px 48px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .cta-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .cta-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(245,241,235,0.5);
+    margin-bottom: 40px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--crimson);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-secondary {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(245,241,235,0.2);
+  }
+
+  .footer-brand span { color: var(--crimson); }
+
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,241,235,0.15);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── SEPARATOR ── */
+  .sep {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    max-width: 1100px;
+  }
+
+  .content-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .hero-layout {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .hero-left {
+    flex: 1;
+    text-align: left;
+  }
+
+  .hero-left .hero-eyebrow { justify-content: flex-start; }
+  .hero-left .hero-headline { text-align: left; }
+  .hero-left .hero-sub { text-align: left; margin-left: 0; }
+  .hero-left .hero-distinction { justify-content: flex-start; }
+
+  .hero-orbital {
+    flex-shrink: 0;
+    width: 420px;
+    height: 420px;
+  }
+
+  @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes spin-rev  { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+  @keyframes pulse-node { 0%,100% { opacity:0.9; r: 7; } 50% { opacity:1; r: 9; } }
+  @keyframes badge-pulse { 0%,100% { opacity:0.6; } 50% { opacity:1; } }
+
+  .orb-ring-1 { transform-origin: 210px 210px; animation: spin-slow 22s linear infinite; }
+  .orb-ring-2 { transform-origin: 210px 210px; animation: spin-rev 34s linear infinite; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-layout">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <div class="hero-eyebrow-text">Ledger — by Dropdown Logistics</div>
+      </div>
+      <h1 class="hero-headline">
+        LinkedIn is<br>self-reported.<br><em>This is verified.</em>
+      </h1>
+      <p class="hero-sub">
+        A governed, data-derived professional credential card for auditors — verified by AuditForge, portable across firms, shareable anywhere.
+      </p>
+      <div style="margin-bottom:32px;padding:18px 22px;background:rgba(196,154,60,0.06);border:1px solid rgba(196,154,60,0.2);border-left:3px solid #C49A3C;border-radius:8px;max-width:440px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#C49A3C;margin-bottom:8px;">THE DISTINCTION</div>
+        <div style="font-family:'Source Serif 4',serif;font-size:17px;font-weight:300;color:rgba(245,241,235,0.85);line-height:1.65;">This is not a resume.<br>It is a <strong style="font-weight:600;color:#F5F1EB;">receiptsume</strong>.</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(245,241,235,0.3);margin-top:10px;">(...we regret nothing.)</div>
+      </div>
+            <div class="hero-distinction">
+        <div class="distinction-item">
+          <div class="distinction-label">Source</div>
+          <div class="distinction-value">Live audit data</div>
+        </div>
+        <div class="distinction-sep"></div>
+        <div class="distinction-item">
+          <div class="distinction-label">Verification</div>
+          <div class="distinction-value">Schema-governed</div>
+        </div>
+        <div class="distinction-sep"></div>
+        <div class="distinction-item">
+          <div class="distinction-label">Distribution</div>
+          <div class="distinction-value">Free forever</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEDGER ORBITAL -->
+    <div class="hero-orbital">
+      <svg viewBox="0 0 420 420" style="width:100%;height:100%;opacity:0.95">
+        <defs>
+          <radialGradient id="ledgerGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#B23531" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#0D1B2A" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Background glow -->
+        <circle cx="210" cy="210" r="160" fill="url(#ledgerGrad)"/>
+
+        <!-- Outer ring — spinning -->
+        <g class="orb-ring-2">
+          <circle cx="210" cy="210" r="175" fill="none" stroke="rgba(196,154,60,0.08)" stroke-width="1"/>
+          <!-- Outer tick marks -->
+          <circle cx="210" cy="35" r="3" fill="rgba(196,154,60,0.3)"/>
+          <circle cx="385" cy="210" r="3" fill="rgba(196,154,60,0.3)"/>
+          <circle cx="210" cy="385" r="3" fill="rgba(196,154,60,0.3)"/>
+          <circle cx="35" cy="210" r="3" fill="rgba(196,154,60,0.3)"/>
+        </g>
+
+        <!-- Inner dashed ring — spinning -->
+        <g class="orb-ring-1">
+          <circle cx="210" cy="210" r="140" fill="none" stroke="rgba(178,53,49,0.2)" stroke-width="1" stroke-dasharray="6 12"/>
+        </g>
+
+        <!-- Static orbit path -->
+        <circle cx="210" cy="210" r="110" fill="none" stroke="rgba(245,241,235,0.04)" stroke-width="1"/>
+
+        <!-- Arm lines -->
+        <!-- Verified — top -->
+        <line x1="210" y1="210" x2="210" y2="100" stroke="rgba(74,158,107,0.4)" stroke-width="1"/>
+        <!-- Portable — right -->
+        <line x1="210" y1="210" x2="320" y2="160" stroke="rgba(107,157,194,0.4)" stroke-width="1"/>
+        <!-- AuditForge — bottom right -->
+        <line x1="210" y1="210" x2="300" y2="285" stroke="rgba(178,53,49,0.4)" stroke-width="1"/>
+        <!-- Free — bottom left -->
+        <line x1="210" y1="210" x2="110" y2="285" stroke="rgba(196,154,60,0.4)" stroke-width="1"/>
+        <!-- Data-Derived — left -->
+        <line x1="210" y1="210" x2="100" y2="160" stroke="rgba(138,108,201,0.4)" stroke-width="1"/>
+
+        <!-- Arm nodes -->
+        <!-- Verified -->
+        <circle cx="210" cy="100" r="8" fill="rgba(74,158,107,0.15)" stroke="rgba(74,158,107,0.6)" stroke-width="1.5" filter="url(#glow)"/>
+        <text x="210" y="82" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" fill="#4A9E6B" letter-spacing="0.05em">VERIFIED</text>
+
+        <!-- Portable -->
+        <circle cx="320" cy="160" r="8" fill="rgba(107,157,194,0.15)" stroke="rgba(107,157,194,0.6)" stroke-width="1.5"/>
+        <text x="345" y="155" text-anchor="start" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" fill="#6B9DC2" letter-spacing="0.05em">PORTABLE</text>
+
+        <!-- AuditForge -->
+        <circle cx="300" cy="285" r="8" fill="rgba(178,53,49,0.15)" stroke="rgba(178,53,49,0.6)" stroke-width="1.5"/>
+        <text x="313" y="295" text-anchor="start" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" fill="#B23531" letter-spacing="0.05em">AUDITFORGE</text>
+
+        <!-- Free -->
+        <circle cx="110" cy="285" r="8" fill="rgba(196,154,60,0.15)" stroke="rgba(196,154,60,0.6)" stroke-width="1.5"/>
+        <text x="95" y="295" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" fill="#C49A3C" letter-spacing="0.05em">FREE CARD</text>
+
+        <!-- Data-Derived -->
+        <circle cx="100" cy="160" r="8" fill="rgba(138,108,201,0.15)" stroke="rgba(138,108,201,0.6)" stroke-width="1.5"/>
+        <text x="85" y="155" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" fill="#8a6cc9" letter-spacing="0.05em">DATA-DERIVED</text>
+
+        <!-- Center node -->
+        <circle cx="210" cy="210" r="52" fill="#0D1B2A" stroke="rgba(178,53,49,0.3)" stroke-width="1.5"/>
+        <circle cx="210" cy="210" r="44" fill="rgba(178,53,49,0.08)" stroke="rgba(178,53,49,0.15)" stroke-width="1"/>
+
+        <!-- Center text -->
+        <text x="210" y="202" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="22" font-weight="800" fill="#F5F1EB" letter-spacing="0.02em">LEDGER</text>
+        <text x="210" y="220" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" font-weight="600" fill="#B23531" letter-spacing="0.15em">VERIFIED</text>
+
+        <!-- Pulsing verified dot -->
+        <circle cx="210" cy="232" r="3" fill="#4A9E6B" style="animation: badge-pulse 2s infinite"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE CARD ── -->
+<section class="card-section">
+
+  <div style="text-align:center">
+    <div class="section-label">The Card</div>
+    <h2 class="section-title">What you've actually done.<br><em style="color:rgba(245,241,235,0.4);font-weight:300">Not what you claim.</em></h2>
+    <p class="section-body">Every stat on the card is derived from governed audit data. Completed engagements. Approved controls. Logged hours. The schema is the source of truth.</p>
+  </div>
+
+  <!-- Card mock -->
+  <div class="ledger-card">
+    <div class="card-header">
+      <div class="card-avatar">MC</div>
+      <div class="card-identity">
+        <div class="card-name">Marcus Caldwell</div>
+        <div class="card-title">DIRECTOR · GOVERNANCE & OVERSIGHT · CIA, CRMA</div>
+      </div>
+      <div class="verified-badge">
+        <div class="verified-dot"></div>
+        <div class="verified-text">Verified</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-stats">
+      <div class="stat-cell">
+        <div class="stat-value" style="color:#C49A3C">4</div>
+        <div class="stat-label">Engagements</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value" style="color:#B23531">212</div>
+        <div class="stat-label">Controls</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value" style="color:#6B9DC2">789h</div>
+        <div class="stat-label">Hours</div>
+      </div>
+    </div>
+    <div class="card-domains">
+      <div class="domains-label">Top Domains</div>
+      <div class="domain-tags">
+        <span class="domain-tag" style="background:rgba(178,53,49,0.12);color:#B23531">Governance</span>
+        <span class="domain-tag" style="background:rgba(196,154,60,0.12);color:#C49A3C">Oversight</span>
+        <span class="domain-tag" style="background:rgba(107,157,194,0.12);color:#6B9DC2">IT General</span>
+        <span class="domain-tag" style="background:rgba(74,158,107,0.12);color:#4A9E6B">Data Gov</span>
+      </div>
+    </div>
+    <div class="card-frameworks">
+      <div class="domains-label">Frameworks</div>
+      <div class="framework-tags">
+        <span class="framework-tag">COSO 2013</span>
+        <span class="framework-tag">SOX/PCAOB</span>
+        <span class="framework-tag">COBIT 2019</span>
+        <span class="framework-tag">ISO 27001</span>
+        <span class="framework-tag">NIST CSF</span>
+      </div>
+    </div>
+    <div class="tokens-row">
+      <span class="token" style="background:rgba(178,53,49,0.12);color:#B23531">STR-07 Methodology</span>
+      <span class="token" style="background:rgba(196,154,60,0.12);color:#C49A3C">STR-05 Pattern Recognition</span>
+      <span class="token" style="background:rgba(138,108,201,0.12);color:#8a6cc9">STR-08 Judgment</span>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-brand">ledger.dev · powered by <span>AuditForge</span></div>
+      <a class="card-share" href="https://auditforge.dev">ledger.dev/mc →</a>
+    </div>
+  </div>
+
+  <!-- What it shows -->
+  <div class="three-col" style="max-width:900px">
+    <div class="feature-card">
+      <div class="feature-number">01 — ENGAGEMENT RECORD</div>
+      <div class="feature-title">Completed engagements, scoped and staffed</div>
+      <div class="feature-body">Every engagement on the card is COMPLETED status in AuditForge. PLANNING engagements show as in-progress. The badge doesn't fire until the work is done.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-number">02 — CONTROL RECORD</div>
+      <div class="feature-title">Controls tested, key controls, frameworks covered</div>
+      <div class="feature-body">Only APPROVED and REVIEWED controls count toward the verified stat. DRAFT controls are excluded. The standard governs what counts.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-number">03 — COMPETENCY TOKENS</div>
+      <div class="feature-title">Governed strengths — ratified, not self-reported</div>
+      <div class="feature-body">STD-AUDITOR-001 defines 8 strength and 8 weakness tokens per auditor. Assigned at onboarding, reviewed annually. Not a self-assessment.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── THE MOAT ── -->
+<section class="card-section" style="background:rgba(0,0,0,0.15)">
+  <div style="text-align:center">
+    <div class="section-label">The Moat</div>
+    <h2 class="section-title">The badge is the business.</h2>
+    <p class="section-body">Manual cards look like the card. AuditForge cards ARE the card. That distinction is worth paying for — and it compounds.</p>
+  </div>
+
+  <div class="moat-section">
+    <div>
+      <h3 class="moat-headline">The auditor becomes the <em>distribution channel.</em></h3>
+      <p class="moat-body">Every auditor who shares their Ledger card is a sales impression for AuditForge. Every "AuditForge Verified" badge on LinkedIn, in an email signature, on a firm website — is organic top-of-funnel that costs nothing and compounds forever.</p>
+      <br>
+      <p class="moat-body">The card is free. The distribution is free. The verified badge is the product.</p>
+    </div>
+    <div class="moat-stats">
+      <div class="moat-stat">
+        <div class="moat-stat-value" style="color:#C49A3C">∞</div>
+        <div class="moat-stat-desc">SALES IMPRESSIONS<br>per shared card<br>Cost: $0</div>
+      </div>
+      <div class="moat-stat">
+        <div class="moat-stat-value" style="color:#B23531">2</div>
+        <div class="moat-stat-desc">REVENUE STREAMS<br>Firm subscription + individual portability<br>One dataset</div>
+      </div>
+      <div class="moat-stat">
+        <div class="moat-stat-value" style="color:#4A9E6B">↑</div>
+        <div class="moat-stat-desc">PULL FROM BELOW<br>Auditors request AuditForge at new firms<br>Individual-driven adoption</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE FLYWHEEL ── -->
+<section class="card-section">
+  <div style="text-align:center">
+    <div class="section-label">The Flywheel</div>
+    <h2 class="section-title">It compounds.</h2>
+  </div>
+
+  <div class="flywheel">
+    <div class="flywheel-step">
+      <div class="flywheel-num">1</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">Firm adopts AuditForge</div>
+        <div class="flywheel-desc">The CAE buys AuditForge. Engagements get scoped. Controls get tested. Data accumulates.</div>
+      </div>
+    </div>
+    <div class="flywheel-step">
+      <div class="flywheel-num">2</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">Auditors get their Ledger cards — free</div>
+        <div class="flywheel-desc">Every auditor at the firm automatically gets a verified Ledger card generated from live engagement data. No action required.</div>
+      </div>
+    </div>
+    <div class="flywheel-step">
+      <div class="flywheel-num">3</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">Auditors share their cards</div>
+        <div class="flywheel-desc">LinkedIn. Email signatures. Job applications. Every share carries the "AuditForge Verified" badge. Every badge is a sales impression.</div>
+      </div>
+    </div>
+    <div class="flywheel-step">
+      <div class="flywheel-num">4</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">Auditors change firms — and want to keep their stats</div>
+        <div class="flywheel-desc">After 3 years of verified stats, an auditor doesn't want to start over. They request AuditForge at their new firm. Pull from below — not just top-down sales.</div>
+      </div>
+    </div>
+    <div class="flywheel-step">
+      <div class="flywheel-num">5</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">Cross-firm portability becomes a paid feature</div>
+        <div class="flywheel-desc">The firm owns the AuditForge data. The auditor pays to port their verified history when they leave. Two revenue streams. One dataset.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BUSINESS MODEL ── -->
+<section class="card-section" style="background:rgba(0,0,0,0.15)">
+  <div style="text-align:center">
+    <div class="section-label">Business Model</div>
+    <h2 class="section-title">Free card. Premium badge.</h2>
+    <p class="section-body">The card is not gatekept. The verification is what compounds.</p>
+  </div>
+
+  <div class="biz-grid">
+    <div class="biz-card" style="border-color:rgba(74,158,107,0.3);background:rgba(74,158,107,0.04)">
+      <div class="biz-tag" style="background:rgba(74,158,107,0.12);color:#4A9E6B">FREE FOREVER</div>
+      <div class="biz-title">Ledger Card</div>
+      <div class="biz-desc">Generated automatically from AuditForge data. Verified badge included. Shareable link. Every auditor at an AuditForge firm gets their card — no setup, no action, no fee.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-tag" style="background:rgba(107,157,194,0.12);color:#6B9DC2">INDIVIDUAL</div>
+      <div class="biz-title">Ledger Standalone</div>
+      <div class="biz-desc">Manual entry for auditors without AuditForge. Card generates — no verified badge. Connect Pentana, Archer, or TeamMate and unlock verification. Individual subscription.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-tag" style="background:rgba(196,154,60,0.12);color:#C49A3C">FIRM</div>
+      <div class="biz-title">Firm Branding</div>
+      <div class="biz-desc">"Verified by [Firm Name] via AuditForge." White-label the card. Firm logo on every auditor's card. Your brand on every share, every impression, every job application.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-tag" style="background:rgba(138,108,201,0.12);color:#8a6cc9">INDIVIDUAL</div>
+      <div class="biz-title">Card Analytics</div>
+      <div class="biz-desc">Who viewed your card. Impression count. Share tracking. LinkedIn-style profile analytics for your verified credential. Know who's looking.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-tag" style="background:rgba(178,53,49,0.12);color:#B23531">INDIVIDUAL</div>
+      <div class="biz-title">Portfolio Export</div>
+      <div class="biz-desc">Branded PDF. Print-ready. For partner track, job applications, CPE submissions, board presentations. Your verified stats in a document that travels with you.</div>
+    </div>
+    <div class="biz-card featured">
+      <div class="biz-tag" style="background:rgba(196,154,60,0.15);color:#C49A3C">THE MOAT — INDIVIDUAL</div>
+      <div class="biz-title">Cross-Firm Portability</div>
+      <div class="biz-desc">The firm owns the AuditForge data. The auditor pays to port their verified history when they leave. After 3 years of governed stats, no auditor wants to start over. They bring AuditForge with them. <strong style="color:rgba(245,241,235,0.8)">Two revenue streams. One dataset. Individual-driven firm adoption.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GENERALIZATION ── -->
+<section class="card-section">
+  <div style="text-align:center">
+    <div class="section-label">The Platform</div>
+    <h2 class="section-title">Audit ships first.</h2>
+    <p class="section-body">One verified badge system. Multiple professional verticals. The infrastructure is built once.</p>
+  </div>
+
+  <div class="gen-grid">
+    <div class="gen-card active">
+      <div class="gen-icon">📋</div>
+      <div class="gen-title">Audit Card</div>
+      <div class="gen-sub">Controls · Engagements · Frameworks</div>
+      <div class="gen-status" style="background:rgba(74,158,107,0.12);color:#4A9E6B">BUILDING NOW</div>
+    </div>
+    <div class="gen-card">
+      <div class="gen-icon">💼</div>
+      <div class="gen-title">Deal Card</div>
+      <div class="gen-sub">Transactions · Asset classes · Deal value</div>
+      <div class="gen-status" style="background:rgba(245,241,235,0.05);color:#4a6080">QUEUED</div>
+    </div>
+    <div class="gen-card">
+      <div class="gen-icon">⚖️</div>
+      <div class="gen-title">Case Card</div>
+      <div class="gen-sub">Cases · Practice areas · Outcomes</div>
+      <div class="gen-status" style="background:rgba(245,241,235,0.05);color:#4a6080">QUEUED</div>
+    </div>
+    <div class="gen-card">
+      <div class="gen-icon">📊</div>
+      <div class="gen-title">Project Card</div>
+      <div class="gen-sub">Engagements · Domains · Delivered value</div>
+      <div class="gen-status" style="background:rgba(245,241,235,0.05);color:#4a6080">QUEUED</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="content-wrap">
+    <div class="cta-headline">
+      The data is already there.<br>
+      <span style="color:rgba(245,241,235,0.3);font-weight:300;font-family:'Source Serif 4',serif;font-style:italic">The card is a read view.</span>
+    </div>
+    <p class="cta-sub">AuditForge already captures everything Ledger needs. Dim_Auditor. Fact_Engagement. Bridge_ControlFramework. This is not a feature rebuild. It is a surface on a schema that exists.</p>
+    <div class="cta-buttons">
+      <a href="mailto:dave@dropdownlogistics.com?subject=Ledger Demo Request" class="btn-primary">Request Demo →</a>
+      <a href="https://auditforge.dev" class="btn-secondary">View AuditForge →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-brand">Ledger · powered by <span>AuditForge</span> · Dropdown Logistics</div>
+  <div class="footer-meta">Chaos → Structured → Automated · 2026</div>
+</footer>
+
+</body>
+</html>
