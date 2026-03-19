@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHAPE Card — Your Ministry Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0D1B2A;
+  --card:    #10202f;
+  --cream:   #F5F1EB;
+  --crimson: #B23531;
+  --amber:   #C49A3C;
+  --gold:    #D4A843;
+  --green:   #4A9E6B;
+  --blue:    #6B9DC2;
+  --violet:  #8a6cc9;
+  --steel:   #6B7B8D;
+  --border:  rgba(245,241,235,0.07);
+  --border-gold: rgba(212,168,67,0.3);
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-serif:   'Source Serif 4', serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--navy);
+  color: var(--cream);
+  font-family: var(--font-serif);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SHARED ── */
+.sec-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.sec-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.sec-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold);
+}
+.sec-body {
+  font-size: 17px;
+  font-weight: 300;
+  color: rgba(245,241,235,0.55);
+  text-align: center;
+  max-width: 520px;
+  line-height: 1.75;
+  margin: 0 auto 48px;
+}
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover { background: #e0b84f; transform: translateY(-1px); }
+.btn-secondary {
+  display: inline-block;
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 32px;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-secondary:hover { background: rgba(212,168,67,0.08); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute;
+  top: -150px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, rgba(212,168,67,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute;
+  bottom: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(178,53,49,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Orbital SVG styles */
+.orbital-hero { margin-bottom: 24px; animation: fadeUp 0.5s ease 0.05s both; }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.5s ease both;
+}
+.eyebrow-line { display: block; width: 40px; height: 1px; background: var(--gold); }
+.eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 9vw, 108px);
+  font-weight: 800;
+  line-height: 1.0;
+  margin-bottom: 24px;
+  animation: fadeUp 0.5s ease 0.1s both;
+}
+.hero-headline em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 21px;
+  font-weight: 300;
+  color: rgba(245,241,235,0.6);
+  line-height: 1.65;
+  margin-bottom: 12px;
+  animation: fadeUp 0.5s ease 0.15s both;
+}
+.hero-sub strong { color: var(--cream); font-weight: 600; }
+
+.hero-receiptsume {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-style: italic;
+  color: rgba(245,241,235,0.35);
+  margin-bottom: 40px;
+  animation: fadeUp 0.5s ease 0.2s both;
+}
+.hero-receiptsume span { color: var(--gold); }
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 64px;
+  animation: fadeUp 0.5s ease 0.25s both;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  animation: fadeUp 0.5s ease 0.3s both;
+}
+.hero-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+.stat-value { font-family: var(--font-display); font-size: 13px; font-weight: 600; }
+.stat-div { width: 1px; height: 32px; background: var(--border); }
+
+/* ── SHAPE LETTERS ── */
+.shape-sec {
+  padding: 100px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  width: 100%;
+}
+.shape-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.shape-card:hover { border-color: rgba(212,168,67,0.25); }
+.shape-letter {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--gold);
+  opacity: 0.18;
+  position: absolute;
+  top: 12px; right: 20px;
+  line-height: 1;
+}
+.shape-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.shape-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.shape-desc {
+  font-size: 14px;
+  color: rgba(245,241,235,0.55);
+  line-height: 1.75;
+}
+.shape-card-example {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--steel);
+}
+.shape-card-example span { color: var(--cream); }
+
+/* ── DEMO CARD ── */
+.card-sec {
+  padding: 100px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0,0,0,0.15);
+}
+.demo-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,168,67,0.08);
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.card-badge-assessed {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--green);
+  background: rgba(74,158,107,0.1);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.card-body {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.card-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), rgba(212,168,67,0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.card-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 3px; }
+.card-role { font-family: var(--font-mono); font-size: 11px; color: var(--gold); margin-bottom: 2px; }
+.card-church { font-size: 13px; color: var(--steel); }
+
+.card-shape-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.shape-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(212,168,67,0.06);
+  border: 1px solid rgba(212,168,67,0.15);
+  border-radius: 8px;
+  padding: 10px 4px;
+}
+.shape-pill-letter {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+.shape-pill-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  color: var(--steel);
+  text-align: center;
+}
+
+.card-gifts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.gift-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.gift-gold   { background: rgba(212,168,67,0.12);  color: var(--gold); }
+.gift-violet { background: rgba(138,108,201,0.12); color: var(--violet); }
+.gift-blue   { background: rgba(107,157,194,0.12); color: var(--blue); }
+.gift-green  { background: rgba(74,158,107,0.12);  color: var(--green); }
+
+.card-ministries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.ministry-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  color: rgba(245,241,235,0.45);
+}
+.card-footer-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--steel);
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.card-footer-row strong { color: var(--gold); }
+
+/* ── HOW IT WORKS ── */
+.how-sec {
+  padding: 100px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  max-width: 960px;
+  width: 100%;
+}
+.how-step {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+}
+.how-num {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+}
+.how-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.how-desc { font-size: 14px; color: rgba(245,241,235,0.55); line-height: 1.7; }
+
+/* ── WHY IT MATTERS ── */
+.why-sec {
+  padding: 100px 48px;
+  background: rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  max-width: 960px;
+  width: 100%;
+  align-items: center;
+}
+.why-left { display: flex; flex-direction: column; gap: 24px; }
+.why-point {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.why-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(212,168,67,0.1);
+  border: 1px solid rgba(212,168,67,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.why-point-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.why-point-desc { font-size: 13px; color: rgba(245,241,235,0.5); line-height: 1.65; }
+.why-right {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+}
+.why-quote {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+.why-quote em { color: var(--gold); font-style: normal; }
+.why-cite {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--steel);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── PORTABILITY ── */
+.port-sec {
+  padding: 100px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.port-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 960px;
+  width: 100%;
+}
+.port-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+}
+.port-icon { font-size: 28px; margin-bottom: 16px; }
+.port-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.port-desc { font-size: 14px; color: rgba(245,241,235,0.55); line-height: 1.75; }
+
+/* ── CTA ── */
+.cta-sec {
+  padding: 120px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-sec::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(212,168,67,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-headline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.cta-sub {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(245,241,235,0.35);
+  margin-bottom: 40px;
+}
+.cta-buttons { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 40px 48px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-brand { font-family: var(--font-mono); font-size: 11px; color: var(--steel); letter-spacing: 0.05em; }
+.footer-brand span { color: var(--gold); }
+.footer-meta { font-family: var(--font-serif); font-size: 13px; font-style: italic; color: rgba(245,241,235,0.2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero, .shape-sec, .card-sec, .how-sec, .why-sec, .port-sec, .cta-sec { padding: 60px 24px; }
+  .why-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-stats { gap: 16px; }
+  footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+  .card-shape-row { grid-template-columns: repeat(5, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-eyebrow">
+    <span class="eyebrow-line"></span>
+    <span class="eyebrow-text">Westside Family Church · Ministry Profile</span>
+  </div>
+
+  <!-- Orbital -->
+  <svg width="148" height="148" viewBox="0 0 148 148" class="orbital-hero" style="overflow:visible">
+    <ellipse cx="74" cy="74" rx="56" ry="18" fill="none" stroke="rgba(212,168,67,0.25)" stroke-width="1" transform="rotate(-20 74 74)"/>
+    <ellipse cx="74" cy="74" rx="38" ry="12" fill="none" stroke="rgba(212,168,67,0.15)" stroke-width="0.75" transform="rotate(-20 74 74)"/>
+    <circle cx="127" cy="67" r="4" fill="#D4A843" opacity="0.9"/>
+    <text x="74" y="95" text-anchor="middle" font-size="76" font-family="Georgia,'Times New Roman',serif" font-style="italic" fill="#D4A843" opacity="0.95">S</text>
+  </svg>
+
+  <h1 class="hero-headline">
+    You were<br><em>designed</em> to serve.
+  </h1>
+
+  <p class="hero-sub">
+    The assessment finds your SHAPE.<br>
+    <strong>The card carries it with you.</strong>
+  </p>
+
+  <p class="hero-receiptsume">
+    This isn't a volunteer form. It's a <span>ministry profile.</span>
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://shape.westsidefamilychurch.com/SHAPE_beta/Logon/Logon.aspx" class="btn-primary">Take the SHAPE Assessment →</a>
+    <a href="#card" class="btn-secondary">See the card</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="stat-label">Framework</span>
+      <span class="stat-value">SHAPE Assessment</span>
+    </div>
+    <div class="stat-div"></div>
+    <div class="hero-stat">
+      <span class="stat-label">Card type</span>
+      <span class="stat-value">Assessment-derived</span>
+    </div>
+    <div class="stat-div"></div>
+    <div class="hero-stat">
+      <span class="stat-label">Cost</span>
+      <span class="stat-value" style="color:var(--green)">Free</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SHAPE LETTERS ── -->
+<section class="shape-sec">
+  <div class="sec-label">The Framework</div>
+  <h2 class="sec-title">Five dimensions.<br><em>One profile.</em></h2>
+  <p class="sec-body">
+    SHAPE is how God has uniquely wired you. The assessment surfaces it.
+    The card makes it portable, shareable, and searchable.
+  </p>
+
+  <div class="shape-grid">
+    <div class="shape-card">
+      <div class="shape-letter">S</div>
+      <div class="shape-tag">Dimension 01</div>
+      <div class="shape-name">Spiritual Gifts</div>
+      <div class="shape-desc">Special gifts given by the Holy Spirit to build up the church and serve others — Teaching, Mercy, Leadership, Hospitality, and more.</div>
+      <div class="shape-card-example">On your card: <span>Teaching · Mercy · Encouragement</span></div>
+    </div>
+    <div class="shape-card">
+      <div class="shape-letter">H</div>
+      <div class="shape-tag">Dimension 02</div>
+      <div class="shape-name">Heart</div>
+      <div class="shape-desc">The passions and causes God has placed in your life — what energizes you, breaks your heart, and drives you toward action.</div>
+      <div class="shape-card-example">On your card: <span>Youth · Global Impact · Serving the Overlooked</span></div>
+    </div>
+    <div class="shape-card">
+      <div class="shape-letter">A</div>
+      <div class="shape-tag">Dimension 03</div>
+      <div class="shape-name">Abilities</div>
+      <div class="shape-desc">Talents, skills, and knowledge developed through life and work — everything from music to logistics to counseling to carpentry.</div>
+      <div class="shape-card-example">On your card: <span>Music · Administration · Communication</span></div>
+    </div>
+    <div class="shape-card">
+      <div class="shape-letter">P</div>
+      <div class="shape-tag">Dimension 04</div>
+      <div class="shape-name">Personality</div>
+      <div class="shape-desc">How God uniquely wired you to relate to people and approach challenges — introvert or extrovert, structured or spontaneous, detail or vision.</div>
+      <div class="shape-card-example">On your card: <span>Introverted · Detail-oriented · Structured</span></div>
+    </div>
+    <div class="shape-card">
+      <div class="shape-letter">E</div>
+      <div class="shape-tag">Dimension 05</div>
+      <div class="shape-name">Experiences</div>
+      <div class="shape-desc">The story God has written through your life — the joys, hardships, and turning points that shaped who you are and what you have to offer.</div>
+      <div class="shape-card-example">On your card: <span>Recovery · Marriage · Cross-Cultural Living</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEMO CARD ── -->
+<section class="card-sec" id="card">
+  <div class="sec-label">The Card</div>
+  <h2 class="sec-title">Assessment-derived.<br><em>Not self-described.</em></h2>
+  <p class="sec-body">
+    Your SHAPE Card is generated from your assessment results —
+    not from a text box. The data is the profile.
+  </p>
+
+  <div class="demo-card">
+    <div class="card-top">
+      <svg width="44" height="44" viewBox="0 0 44 44" style="overflow:visible">
+        <ellipse cx="22" cy="22" rx="17" ry="5.5" fill="none" stroke="rgba(212,168,67,0.3)" stroke-width="0.75" transform="rotate(-20 22 22)"/>
+        <circle cx="38" cy="19.5" r="2.5" fill="#D4A843" opacity="0.9"/>
+        <text x="22" y="29" text-anchor="middle" font-size="22" font-family="Georgia,serif" font-style="italic" fill="#D4A843" opacity="0.95">S</text>
+      </svg>
+      <div class="card-badge-assessed">✅ Assessment Verified</div>
+    </div>
+
+    <div class="card-body">
+      <div class="card-avatar">EK</div>
+      <div>
+        <div class="card-name">Emily Kitchens</div>
+        <div class="card-role">Ministry Volunteer · Westside Family</div>
+        <div class="card-church">Westside Family Church · Lenexa</div>
+      </div>
+    </div>
+
+    <div class="card-shape-row">
+      <div class="shape-pill">
+        <span class="shape-pill-letter">S</span>
+        <span class="shape-pill-label">Teaching</span>
+      </div>
+      <div class="shape-pill">
+        <span class="shape-pill-letter">H</span>
+        <span class="shape-pill-label">Youth</span>
+      </div>
+      <div class="shape-pill">
+        <span class="shape-pill-letter">A</span>
+        <span class="shape-pill-label">Music</span>
+      </div>
+      <div class="shape-pill">
+        <span class="shape-pill-letter">P</span>
+        <span class="shape-pill-label">Creative</span>
+      </div>
+      <div class="shape-pill">
+        <span class="shape-pill-letter">E</span>
+        <span class="shape-pill-label">Recovery</span>
+      </div>
+    </div>
+
+    <div class="card-gifts">
+      <span class="gift-tag gift-gold">Teaching</span>
+      <span class="gift-tag gift-violet">Mercy</span>
+      <span class="gift-tag gift-blue">Encouragement</span>
+      <span class="gift-tag gift-green">Hospitality</span>
+    </div>
+
+    <div class="card-ministries">
+      <span class="ministry-tag">Students Ministry</span>
+      <span class="ministry-tag">Worship Team</span>
+      <span class="ministry-tag">Care & Counseling</span>
+    </div>
+
+    <div class="card-footer-row">
+      <span>shapecard.org/ek</span>
+      <span>powered by <strong>SHAPE Assessment</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-sec" id="how">
+  <div class="sec-label">How It Works</div>
+  <h2 class="sec-title">Three steps.<br><em>One card.</em></h2>
+  <p class="sec-body">The assessment already does the work. The card just shows it.</p>
+
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-num">STEP 01</div>
+      <div class="how-title">Take the SHAPE Assessment</div>
+      <div class="how-desc">Westside's assessment walks you through all five dimensions — spiritual gifts, heart, abilities, personality, and experiences. It takes about 20 minutes.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">STEP 02</div>
+      <div class="how-title">Your card generates automatically</div>
+      <div class="how-desc">Based on your results, your SHAPE Card is built. Five dimensions. Your gifts listed. Ministry fit suggestions. Assessment-verified badge fires automatically.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">STEP 03</div>
+      <div class="how-title">Share it anywhere</div>
+      <div class="how-desc">One link. Your card lives at shapecard.org/[yourname]. Share it with ministry leaders, in your small group, on LinkedIn, or in your email signature.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">FOR LEADERS</div>
+      <div class="how-title">Search your congregation's SHAPEs</div>
+      <div class="how-desc">Ministry leaders can search by spiritual gift, ability, or heart. Find who's equipped for what. Stop guessing. Start matching people to purpose.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY IT MATTERS ── -->
+<section class="why-sec">
+  <div class="sec-label">Why It Matters</div>
+  <h2 class="sec-title">The assessment ends.<br><em>The card doesn't.</em></h2>
+  <p class="sec-body">Most assessments live in a folder. The SHAPE Card puts your results to work.</p>
+
+  <div class="why-grid">
+    <div class="why-left">
+      <div class="why-point">
+        <div class="why-icon">✨</div>
+        <div>
+          <div class="why-point-title">Faithfulness</div>
+          <div class="why-point-desc">Operating in your God-given design isn't optional — it's the call. The card makes it actionable.</div>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-icon">🌱</div>
+        <div>
+          <div class="why-point-title">Fruitfulness</div>
+          <div class="why-point-desc">The right person in the right role makes an impact. Mismatched volunteers burn out. Matched ones multiply.</div>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-icon">😊</div>
+        <div>
+          <div class="why-point-title">Joy</div>
+          <div class="why-point-desc">Serving in your SHAPE doesn't drain you — it energizes you. That's how you know you're in the right place.</div>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-icon">🔍</div>
+        <div>
+          <div class="why-point-title">Discoverability</div>
+          <div class="why-point-desc">Ministry leaders can find you based on what you're actually equipped for — not just who raised their hand first.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-right">
+      <div class="why-quote">
+        "When you understand how God has designed you, serving becomes more than just filling a role — it becomes a place where your <em>faith, gifts, and passions come alive.</em>"
+      </div>
+      <div class="why-cite">— Westside Family Church · SHAPE Framework</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PORTABILITY ── */
+<section class="port-sec">
+  <div class="sec-label">The Card is Yours</div>
+  <h2 class="sec-title">Portable. Shareable.<br><em>Always verified.</em></h2>
+  <p class="sec-body">Your SHAPE travels with you — to new campuses, new cities, new seasons of life.</p>
+
+  <div class="port-grid">
+    <div class="port-card">
+      <div class="port-icon">🔗</div>
+      <div class="port-title">One shareable link</div>
+      <div class="port-desc">shapecard.org/[yourname]. That's it. Share it anywhere — email, LinkedIn, a text to a ministry leader, a church staff interview.</div>
+    </div>
+    <div class="port-card">
+      <div class="port-icon">🏛️</div>
+      <div class="port-title">Cross-campus ready</div>
+      <div class="port-desc">Move from Lenexa to Speedway? New campus, same card. Ministry leaders at any Westside location can see your full SHAPE.</div>
+    </div>
+    <div class="port-card">
+      <div class="port-icon">🔒</div>
+      <div class="port-title">You control what's visible</div>
+      <div class="port-desc">Show your gifts. Hide your experiences. Share everything. The card respects your privacy. You choose what ministry leaders see.</div>
+    </div>
+    <div class="port-card">
+      <div class="port-icon">📄</div>
+      <div class="port-title">Export anytime</div>
+      <div class="port-desc">Download your SHAPE profile as a PDF — for a serve application, a small group leader role, or just to keep on file. Your data, always yours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-sec">
+  <svg width="100" height="100" viewBox="0 0 100 100" style="overflow:visible;margin-bottom:28px;opacity:0.6">
+    <ellipse cx="50" cy="50" rx="38" ry="12" fill="none" stroke="rgba(212,168,67,0.25)" stroke-width="1" transform="rotate(-20 50 50)"/>
+    <circle cx="87" cy="44" r="3.5" fill="#D4A843" opacity="0.9"/>
+    <text x="50" y="66" text-anchor="middle" font-size="52" font-family="Georgia,serif" font-style="italic" fill="#D4A843" opacity="0.95">S</text>
+  </svg>
+
+  <h2 class="cta-headline">
+    The design is already there.
+  </h2>
+  <p class="cta-sub">The card is a read view.</p>
+  <p class="sec-body" style="margin-bottom:48px">
+    Your SHAPE Assessment already captured everything the card needs.
+    Gifts. Passions. Abilities. Wiring. Story.
+    This is not a new form to fill out. It is a surface on data that exists.
+  </p>
+
+  <div class="cta-buttons">
+    <a href="https://shape.westsidefamilychurch.com/SHAPE_beta/Logon/Logon.aspx" class="btn-primary">Take the SHAPE Assessment →</a>
+    <a href="https://www.westsidefamily.church/shape" class="btn-secondary">Learn about SHAPE at Westside →</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">SHAPE Card · powered by <span>Westside Family Church</span> · Dropdown Logistics</div>
+  <div class="footer-meta">The ministry profile ships.</div>
+</footer>
+
+</body>
+</html>
