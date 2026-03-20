@@ -1,5 +1,6 @@
+﻿import styles from './coming-soon.module.css'
 export const metadata = {
-  title: 'The Platform – Ledger',
+  title: 'The Platform â€“ Ledger',
   description: 'One verified badge system. Five professional verticals. The infrastructure is built once.',
 }
 
@@ -15,7 +16,7 @@ const VERTICALS = [
     status: 'live',
     url: '/',
     cardUrl: '/card/dk',
-    demos: ['Dave Kitchens · CPA · 10+ yrs Internal Audit'],
+    demos: ['Dave Kitchens Â· CPA Â· 10+ yrs Internal Audit'],
   },
   {
     name: 'Charter',
@@ -23,7 +24,7 @@ const VERTICALS = [
     color: '#6B8F71',
     headline: 'Your practice,',
     headlineEm: 'credentialed.',
-    sub: 'Your clinical record, verified and portable. Licensure, modalities, populations served – governed by your practice management system, attributed to you.',
+    sub: 'Your clinical record, verified and portable. Licensure, modalities, populations served â€“ governed by your practice management system, attributed to you.',
     distinction: 'Not a Psychology Today profile. A governed practice record.',
     status: 'coming',
     demos: [],
@@ -34,10 +35,10 @@ const VERTICALS = [
     color: '#C49A3C',
     headline: 'Your creative record,',
     headlineEm: 'clarified.',
-    sub: 'Every program you built, every venue you ran, every menu you developed – governed and portable.',
-    distinction: 'Like a résumé. Like a consommé. Your bar program distilled to its essence.',
+    sub: 'Every program you built, every venue you ran, every menu you developed â€“ governed and portable.',
+    distinction: 'Like a rÃ©sumÃ©. Like a consommÃ©. Your bar program distilled to its essence.',
     status: 'coming',
-    demos: ['Sergio · Bar Professional'],
+    demos: ['Sergio Â· Bar Professional'],
   },
   {
     name: 'Set',
@@ -45,7 +46,7 @@ const VERTICALS = [
     color: '#8a6cc9',
     headline: 'Your program,',
     headlineEm: 'credentialed.',
-    sub: 'Every ensemble directed, every student developed, every performance conducted – governed and shareable.',
+    sub: 'Every ensemble directed, every student developed, every performance conducted â€“ governed and shareable.',
     distinction: 'Not a bio. A record of what you built.',
     status: 'coming',
     demos: [],
@@ -56,14 +57,14 @@ const VERTICALS = [
     color: '#4A9E6B',
     headline: 'I care for your plants',
     headlineEm: 'like you never left.',
-    sub: 'Specialized, attentive plant care for collections that deserve more than guesswork. Every client, every species, every outcome – documented.',
+    sub: 'Specialized, attentive plant care for collections that deserve more than guesswork. Every client, every species, every outcome â€“ documented.',
     distinction: 'Not a Craigslist listing. A verified service record.',
     status: 'coming',
     demos: [],
   },
 ]
 
-function SmallOrbital({ color = '#C49A3C', letter = 'ℒ', id }) {
+function SmallOrbital({ color = '#C49A3C', letter = 'â„’', id }) {
   const pathId = `orbit-${id}`
   return (
     <svg width="56" height="56" viewBox="0 0 56 56" style={{overflow:'visible'}} aria-hidden="true">
@@ -94,11 +95,11 @@ export default function ComingSoon() {
       <div className={styles.glow1}/>
       <div className={styles.glow2}/>
 
-      {/* ── PLATFORM HEADER ── */}
+      {/* â”€â”€ PLATFORM HEADER â”€â”€ */}
       <section className={styles.platformHeader}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowLine}/>
-          <span className={styles.eyebrowText}>Dropdown Logistics · The Ledger Platform</span>
+          <span className={styles.eyebrowText}>Dropdown Logistics Â· The Ledger Platform</span>
         </div>
         <h1 className={styles.platformTitle}>
           One badge system.<br/>
@@ -106,7 +107,7 @@ export default function ComingSoon() {
         </h1>
         <p className={styles.platformSub}>
           The architecture is built once. The data changes.
-          Every professional deserves a verified record – not just auditors.
+          Every professional deserves a verified record â€“ not just auditors.
         </p>
         <div className={styles.platformMeta}>
           <div className={styles.metaItem}>
@@ -120,25 +121,25 @@ export default function ComingSoon() {
           </div>
           <div className={styles.metaDiv}/>
           <div className={styles.metaItem}>
-            <span className={styles.metaVal}>∞</span>
+            <span className={styles.metaVal}>âˆž</span>
             <span className={styles.metaLbl}>Verticals possible</span>
           </div>
         </div>
       </section>
 
-      {/* ── TICKER ── */}
+      {/* â”€â”€ TICKER â”€â”€ */}
       <div className={styles.ticker}>
         <div className={styles.tickerTrack}>
           {[...Array(2)].flatMap(() => VERTICALS.map((v, i) => (
             <span key={`${v.name}-${i}`} className={styles.tickerItem}>
-              <span className={styles.tickerDot} style={{color: v.color}}>·</span>
-              {v.name.toUpperCase()} – {v.tag.toUpperCase()}
+              <span className={styles.tickerDot} style={{color: v.color}}>Â·</span>
+              {v.name.toUpperCase()} â€“ {v.tag.toUpperCase()}
             </span>
           )))}
         </div>
       </div>
 
-      {/* ── VERTICALS ── */}
+      {/* â”€â”€ VERTICALS â”€â”€ */}
       <div className={styles.verticals}>
         {VERTICALS.map((v, i) => (
           <section
@@ -157,7 +158,7 @@ export default function ComingSoon() {
                     <div className={styles.verticalTag}>{v.tag}</div>
                   </div>
                   <div className={v.status === 'live' ? styles.statusLive : styles.statusComing}>
-                    {v.status === 'live' ? '● LIVE' : '○ COMING SOON'}
+                    {v.status === 'live' ? 'â— LIVE' : 'â—‹ COMING SOON'}
                   </div>
                 </div>
 
@@ -185,7 +186,7 @@ export default function ComingSoon() {
                 {v.status === 'live' ? (
                   <div className={styles.verticalActions}>
                     <a href={v.url} className={styles.btnPrimary} style={{background: v.color}}>
-                      See Ledger →
+                      See Ledger â†’
                     </a>
                     {v.cardUrl && (
                       <a href={v.cardUrl} className={styles.btnSecondary} style={{borderColor: `${v.color}50`, color: v.color}}>
@@ -199,13 +200,13 @@ export default function ComingSoon() {
                     <a href="mailto:dave@dropdownlogistics.com"
                       className={styles.btnSecondary}
                       style={{borderColor: `${v.color}50`, color: v.color}}>
-                      Get early access →
+                      Get early access â†’
                     </a>
                   </div>
                 )}
               </div>
 
-              {/* Right – accent */}
+              {/* Right â€“ accent */}
               <div className={styles.verticalRight}>
                 <div className={styles.accentCard} style={{borderColor: `${v.color}25`}}>
                   <div className={styles.accentCardTop} style={{borderColor: `${v.color}30`}}>
@@ -213,7 +214,7 @@ export default function ComingSoon() {
                       {v.name} Card
                     </span>
                     <span className={v.status === 'live' ? styles.accentBadgeLive : styles.accentBadgeComing}>
-                      {v.status === 'live' ? '✅ Verified' : '○ Coming Soon'}
+                      {v.status === 'live' ? 'âœ… Verified' : 'â—‹ Coming Soon'}
                     </span>
                   </div>
                   <div className={styles.accentCardBody}>
@@ -250,7 +251,7 @@ export default function ComingSoon() {
         ))}
       </div>
 
-      {/* ── CTA ── */}
+      {/* â”€â”€ CTA â”€â”€ */}
       <section className={styles.cta}>
         <div className={styles.ctaInner}>
           <div className={styles.secLabel}>Build on the Platform</div>
@@ -263,14 +264,14 @@ export default function ComingSoon() {
             deserves a verified record, we want to hear from you.
           </p>
           <a href="mailto:dave@dropdownlogistics.com" className={styles.btnPrimary} style={{background:'var(--crimson)'}}>
-            Pitch your vertical →
+            Pitch your vertical â†’
           </a>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
+      {/* â”€â”€ FOOTER â”€â”€ */}
       <footer className={styles.footer}>
-        <span>Ledger Platform · Dropdown Logistics</span>
+        <span>Ledger Platform Â· Dropdown Logistics</span>
         <span className={styles.footerMeta}>The architecture does not change. The data does.</span>
       </footer>
 
