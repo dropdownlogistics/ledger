@@ -1,10 +1,8 @@
 ﻿import './globals.css'
-
 export const metadata = {
-  title: 'Ledger â€” AuditForge Verified',
+  title: 'Ledger - AuditForge Verified',
   description: 'LinkedIn is self-reported. This is verified.',
 }
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
