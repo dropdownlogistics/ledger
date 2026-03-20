@@ -1,4 +1,4 @@
-/* ── SHARED ── */
+﻿/* â”€â”€ SHARED â”€â”€ */
 .secLabel {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -57,7 +57,7 @@
 }
 .btnSecondary:hover { background: rgba(196,154,60,0.08); transform: translateY(-1px); }
 
-/* ── HERO ── */
+/* â”€â”€ HERO â”€â”€ */
 .hero {
   padding-top: 96px;
   padding-bottom: 96px;
@@ -68,6 +68,8 @@
   position: relative;
   overflow: visible;
 }
+main { overflow: visible; }
+
 .heroGlow1 {
   position: absolute;
   top: -100px; left: -100px;
@@ -172,7 +174,7 @@
 }
 .heroStatDivider { width: 1px; height: 28px; background: var(--border); }
 
-/* ── ORBITAL ── */
+/* â”€â”€ ORBITAL â”€â”€ */
 .heroRight {
   overflow: visible;
   display: flex;
@@ -197,7 +199,7 @@
   animation: lPulse 4s ease-in-out infinite;
 }
 
-/* ── TICKER ── */
+/* â”€â”€ TICKER â”€â”€ */
 .ticker {
   width: 100%;
   overflow: visible;
@@ -226,7 +228,7 @@
   opacity: 0.7;
 }
 
-/* ── RECEIPTSUME / DEMO CARD ── */
+/* â”€â”€ RECEIPTSUME / DEMO CARD â”€â”€ */
 .receiptsumeSec {
   padding: 72px 48px;
   display: flex;
@@ -282,7 +284,7 @@
 .demoCardFooter { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--steel); padding-top: 14px; border-top: 1px solid var(--border); }
 .demoCardFooter strong { color: var(--crimson); }
 
-/* ── BADGE SECTION ── */
+/* â”€â”€ BADGE SECTION â”€â”€ */
 .badgeSec { padding: 72px 48px; display: flex; flex-direction: column; align-items: center; }
 .badgeGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; width: 100%; max-width: 920px; }
 .badgeCard { background: var(--card); border: 1px solid var(--border); border-radius: 11px; padding: 24px; }
@@ -292,7 +294,7 @@
 .badgeReq { display: flex; flex-direction: column; gap: 3px; font-family: var(--font-mono); font-size: 10px; color: var(--steel); padding-top: 14px; border-top: 1px solid var(--border); }
 .badgeReqLabel { text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); }
 
-/* ── MOAT ── */
+/* â”€â”€ MOAT â”€â”€ */
 .moatSec { padding: 72px 48px; background: rgba(0,0,0,0.15); }
 .moatInner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; max-width: 1100px; margin: 0 auto; align-items: start; }
 .moatLeft { display: flex; flex-direction: column; }
@@ -305,7 +307,7 @@
 .moatStatDesc { font-family: var(--font-mono); font-size: 10px; color: var(--steel); line-height: 1.6; letter-spacing: 0.04em; }
 .moatStatDiv { height: 1px; background: var(--border); }
 
-/* ── FLYWHEEL ── */
+/* â”€â”€ FLYWHEEL â”€â”€ */
 .flywheelSec { padding: 72px 48px; display: flex; flex-direction: column; align-items: center; }
 .flywheelSteps { display: flex; flex-direction: column; max-width: 600px; width: 100%; }
 .flywheelStep { display: flex; gap: 20px; align-items: flex-start; position: relative; }
@@ -321,7 +323,7 @@
 .flywheelDesc { font-size: 13px; font-weight: 300; color: rgba(245,241,235,0.5); line-height: 1.7; }
 .flywheelArrow { position: absolute; left: 18px; top: 42px; color: var(--border-amber); font-size: 16px; z-index: 0; }
 
-/* ── BUSINESS MODEL ── */
+/* â”€â”€ BUSINESS MODEL â”€â”€ */
 .bizSec { padding: 72px 48px; display: flex; flex-direction: column; align-items: center; background: rgba(0,0,0,0.15); }
 .bizGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1060px; width: 100%; }
 .bizCard { background: var(--card); border: 1px solid var(--border); border-radius: 11px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
@@ -330,7 +332,7 @@
 .bizTitle { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
 .bizDesc { font-size: 13px; color: rgba(245,241,235,0.5); line-height: 1.7; }
 
-/* ── GENERALIZATION ── */
+/* â”€â”€ GENERALIZATION â”€â”€ */
 .genSec { padding: 72px 48px; display: flex; flex-direction: column; align-items: center; }
 .genGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; max-width: 920px; width: 100%; }
 .genCard { background: var(--card); border: 1px solid var(--border); border-radius: 11px; padding: 22px; display: flex; flex-direction: column; gap: 7px; opacity: 0.45; transition: opacity 0.2s; }
@@ -340,7 +342,7 @@
 .genSub { font-family: var(--font-mono); font-size: 9px; color: var(--steel); line-height: 1.5; }
 .genStatus { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 7px; border-radius: 3px; margin-top: 6px; display: inline-block; width: fit-content; }
 
-/* ── CTA ── */
+/* â”€â”€ CTA â”€â”€ */
 .ctaSec { padding: 100px 48px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: visible; }
 .ctaSec::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(178,53,49,0.05) 0%, transparent 70%); pointer-events:none; }
 .ctaOrbital { margin-bottom: 24px; }
@@ -349,13 +351,13 @@
 .ctaBody { font-size: 13px; font-weight: 300; color: rgba(245,241,235,0.4); max-width: 480px; line-height: 1.75; margin-bottom: 40px; font-family: var(--font-mono); }
 .ctaButtons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
-/* ── FOOTER ── */
+/* â”€â”€ FOOTER â”€â”€ */
 .footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
 .footerBrand { font-family: var(--font-mono); font-size: 11px; color: var(--steel); letter-spacing: 0.05em; }
 .footerBrand span { color: var(--crimson); }
 .footerMeta { font-family: var(--font-serif); font-size: 12px; font-style: italic; color: rgba(245,241,235,0.2); }
 
-/* ── KEYFRAMES ── */
+/* â”€â”€ KEYFRAMES â”€â”€ */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -377,7 +379,7 @@
   to   { transform: translateX(-50%); }
 }
 
-/* ── RESPONSIVE ── */
+/* â”€â”€ RESPONSIVE â”€â”€ */
 @media (max-width: 1000px) {
   .heroInner {
   overflow: visible; grid-template-columns: 1fr; gap: 24px; }

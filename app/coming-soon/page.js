@@ -1,8 +1,6 @@
-import styles from './coming-soon.module.css'
-
 export const metadata = {
-  title: 'The Platform — Ledger',
-  description: 'One verified badge system. Seven professional verticals. The infrastructure is built once.',
+  title: 'The Platform – Ledger',
+  description: 'One verified badge system. Five professional verticals. The infrastructure is built once.',
 }
 
 const VERTICALS = [
@@ -25,10 +23,10 @@ const VERTICALS = [
     color: '#6B8F71',
     headline: 'Your practice,',
     headlineEm: 'credentialed.',
-    sub: 'Your clinical record, verified and portable. Licensure, modalities, populations served — governed by your practice management system, attributed to you.',
+    sub: 'Your clinical record, verified and portable. Licensure, modalities, populations served – governed by your practice management system, attributed to you.',
     distinction: 'Not a Psychology Today profile. A governed practice record.',
     status: 'coming',
-    demos: ['Waters Counseling · Kansas City', 'Cindy · BothAnd Therapy KC'],
+    demos: [],
   },
   {
     name: 'Pour',
@@ -36,10 +34,10 @@ const VERTICALS = [
     color: '#C49A3C',
     headline: 'Your creative record,',
     headlineEm: 'clarified.',
-    sub: '"Developed the cocktail program at a James Beard Award-winning venue." Cool. Prove it.',
+    sub: 'Every program you built, every venue you ran, every menu you developed – governed and portable.',
     distinction: 'Like a résumé. Like a consommé. Your bar program distilled to its essence.',
     status: 'coming',
-    demos: [],
+    demos: ['Sergio · Bar Professional'],
   },
   {
     name: 'Set',
@@ -47,30 +45,8 @@ const VERTICALS = [
     color: '#8a6cc9',
     headline: 'Your program,',
     headlineEm: 'credentialed.',
-    sub: '17 years of building a program. Every ensemble directed, every student developed, every performance conducted — governed and shareable.',
+    sub: 'Every ensemble directed, every student developed, every performance conducted – governed and shareable.',
     distinction: 'Not a bio. A record of what you built.',
-    status: 'coming',
-    demos: [],
-  },
-  {
-    name: 'Calling',
-    tag: 'Faith & Ministry',
-    color: '#D4A843',
-    headline: 'You were designed',
-    headlineEm: 'to serve.',
-    sub: 'The SHAPE assessment finds your gifts. The card carries them with you — to new campuses, new cities, new seasons of life.',
-    distinction: 'Not a volunteer form. A ministry profile.',
-    status: 'coming',
-    demos: ['Westside Family Church · Lenexa & Speedway'],
-  },
-  {
-    name: 'Purpose',
-    tag: 'Legacy & Consciousness',
-    color: '#6B9DC2',
-    headline: 'Your score isn\'t how',
-    headlineEm: 'you feel today.',
-    sub: 'The governed record of a life lived with intention. For legacy planning, coaching, and the work that doesn\'t fit a resume.',
-    distinction: 'Not a vision board. A living document.',
     status: 'coming',
     demos: [],
   },
@@ -80,7 +56,7 @@ const VERTICALS = [
     color: '#4A9E6B',
     headline: 'I care for your plants',
     headlineEm: 'like you never left.',
-    sub: 'Specialized, attentive plant care for collections that deserve more than guesswork. Every client, every species, every outcome — documented.',
+    sub: 'Specialized, attentive plant care for collections that deserve more than guesswork. Every client, every species, every outcome – documented.',
     distinction: 'Not a Craigslist listing. A verified service record.',
     status: 'coming',
     demos: [],
@@ -126,11 +102,11 @@ export default function ComingSoon() {
         </div>
         <h1 className={styles.platformTitle}>
           One badge system.<br/>
-          <em>Seven verticals.</em>
+          <em>Five verticals.</em>
         </h1>
         <p className={styles.platformSub}>
           The architecture is built once. The data changes.
-          Every professional deserves a verified record — not just auditors.
+          Every professional deserves a verified record – not just auditors.
         </p>
         <div className={styles.platformMeta}>
           <div className={styles.metaItem}>
@@ -139,7 +115,7 @@ export default function ComingSoon() {
           </div>
           <div className={styles.metaDiv}/>
           <div className={styles.metaItem}>
-            <span className={styles.metaVal} style={{color:'var(--amber)'}}>6</span>
+            <span className={styles.metaVal} style={{color:'var(--amber)'}}>4</span>
             <span className={styles.metaLbl}>Coming soon</span>
           </div>
           <div className={styles.metaDiv}/>
@@ -156,7 +132,7 @@ export default function ComingSoon() {
           {[...Array(2)].flatMap(() => VERTICALS.map((v, i) => (
             <span key={`${v.name}-${i}`} className={styles.tickerItem}>
               <span className={styles.tickerDot} style={{color: v.color}}>·</span>
-              {v.name.toUpperCase()} — {v.tag.toUpperCase()}
+              {v.name.toUpperCase()} – {v.tag.toUpperCase()}
             </span>
           )))}
         </div>
@@ -229,7 +205,7 @@ export default function ComingSoon() {
                 )}
               </div>
 
-              {/* Right — accent */}
+              {/* Right – accent */}
               <div className={styles.verticalRight}>
                 <div className={styles.accentCard} style={{borderColor: `${v.color}25`}}>
                   <div className={styles.accentCardTop} style={{borderColor: `${v.color}30`}}>
