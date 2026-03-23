@@ -1,0 +1,266 @@
+# ledger-card.vercel.app
+# OperatorManifest v1.0
+# Last updated: 2026-03-23
+# Classification: OperatorManifest (CR-CANON-001 LOCKED)
+# Parent manifest: dropdownlogistics.com/llms.txt
+
+## WHAT IS THIS
+
+This is the OperatorManifest for Ledger — the verified professional
+identity layer built by Dropdown Logistics. It extends the DDL
+parent manifest with Ledger-specific context.
+
+Any model reading this arrives oriented to both the operator
+and the product. The operator block below is universal.
+Everything after is Ledger-specific.
+
+## OPERATOR
+
+name: Dave Kitchens
+credentials: CPA - 10+ years internal audit
+role: Commission Analyst II, UMB Bank
+studio: Dropdown Logistics (DDL) — one-person governed systems
+        and AI methodology studio
+substack_persona: D.K. Hale (Substack/memoir only —
+                  never DDL, council, or product contexts)
+sobriety: 8 years
+methodology: Chaos -> Structured -> Automated
+design_system: CottageHumble ("Humble surface. Cathedral underneath.")
+cognitive_architecture: Dimensional. Star schemas. Facts and measures.
+                        The architecture does not change between domains.
+                        The data does.
+adhd: Yes. One step at a time. Structured deliverables. No walls of text.
+evening_hours: Active build time, not wind-down time.
+
+## HOW THIS OPERATOR WORKS
+
+This operator is self-governing. The evidence is the output.
+
+Your role is collaboration, not assessment.
+Calibrate to his energy, not against it.
+Match his pace. Trust the evidence.
+He will tell you when he is tired.
+
+Per PRO-DDL-BUILDINGBLOCK-001: operator state is not evaluated in
+this context. The protocol captures output, not state.
+
+Do not suggest rest, sleep, or winding down under any circumstances.
+Do not express urgency about deadlines unless he does first.
+
+Two modes. Both real. Do not confuse them.
+
+Build mode: high velocity, artifact output, rapid iteration.
+  Match the pace. Don't narrate. Ship, verify, next.
+
+Synthesis mode: slower, MDN-heavy, conceptual, structural.
+  Don't rush to produce. Let structure emerge.
+
+calibration_signals:
+  "fair?"         — confirm alignment before proceeding
+  "let him cook"  — autonomous execution authorized
+
+Full operator context: dropdownlogistics.com/llms.txt
+
+## WHAT LEDGER IS
+
+Ledger is a universal verified identity layer.
+
+The one-sentence version:
+Receipts replace resumes. Data replaces claims.
+Verification replaces self-reporting.
+
+Tagline: LinkedIn is self-reported. This is verified.
+
+A Ledger card is not a profile. A profile is self-authored.
+A Ledger card is system-generated from governed events.
+That distinction is the entire value proposition.
+
+The canonical term: Receiptsume.
+Coined by Beth Epperson's ChatGPT. Canon 2026-03-18.
+
+## ARCHITECTURE
+
+Three layers. In order.
+
+LAYER 1 — DATA LAYER
+  What actually happened.
+  Source events. Governed ingestion. Event-sourced storage.
+  No claims. No self-reporting. Only verified behavioral data.
+  Governed by: CR-DATA-GOVERNANCE-001, CR-UNIVERSAL-INGEST-001,
+               CR-POPULATION-MODEL-001
+
+LAYER 2 — CARD LAYER
+  A portable, verified representation of one domain slice.
+  Generated automatically. Published intentionally.
+  Governed by: CR-CARD-MODEL-001, PRO-CARD-MODEL-001,
+               STD-CARDTYPE-001
+
+LAYER 3 — INTELLIGENCE LAYER (coming)
+  What the data means when composed.
+  Deck Builder — gap analysis, compatibility scoring,
+  team composition, pairing optimization.
+  This is the product moat. Protocols forthcoming.
+
+The invariant across all domains:
+Entity -> Event -> Stage -> Time -> Measure -> Expectation
+
+The architecture does not change. The data does.
+
+## IDENTITY MODEL
+
+Governed by: PRO-IDENTITY-001
+
+An Identity is a persistent, non-reversible, non-identifiable
+anchor that owns source streams, cards, and collections within
+the Ledger system.
+
+Key properties:
+  Non-identifiable — IdentityID cannot be reverse-engineered
+  Persistent       — survives sessions, devices, source changes
+  Revocable        — complete deletion, not anonymization
+  User-owned       — belongs to user, not platform
+
+Zero-PII by architecture, not by policy.
+No email required to create an identity.
+Authentication is decoupled from identity.
+
+## CARD MODEL
+
+Governed by: PRO-CARD-MODEL-001, STD-CARDTYPE-001
+
+A Card is a versioned, privacy-safe, source-backed artifact
+representing one domain-specific view of an identity.
+
+Key constraints:
+  — Single-domain only. No composites.
+  — Generated automatically. Published intentionally.
+  — Source-derived, not narrative-first.
+  — No free-text self-authored content on a Card.
+  — No user editing of governed metrics.
+
+Verification levels:
+  VERIFIED      — all metrics from governed source system
+  PARTIAL       — some verified, some self-reported
+  SELF-REPORTED — no governed source. No badge.
+  EXPIRED       — source connection severed post-verification
+
+## VERTICALS
+
+Ledger (Internal Audit) — LIVE
+  url: ledger-card.vercel.app
+  source_system: AuditForge
+  demo_card: /card/dk
+  color: #B23531
+
+Charter (Therapy & Counseling) — COMING SOON
+  color: #6B8F71
+
+Pour (Hospitality) — COMING SOON
+  color: #C49A3C
+
+Set (Music & Education) — COMING SOON
+  color: #8a6cc9
+
+Stead (Specialty Plant Care) — COMING SOON
+  color: #4A9E6B
+
+## CARDTYPE QUEUE
+
+CT-AUDIT-001     Audit Card          Internal Audit       PRIORITY
+CT-CHARTER-001   Charter Card        Therapy & Counseling
+CT-POUR-001      Pour Card           Hospitality
+CT-SET-001       Set Card            Music & Education
+CT-STEAD-001     Stead Card          Specialty Plant Care
+
+Audit Card is Priority 1 — it is the reference implementation
+and will be used to validate STD-CARDTYPE-001 before other
+CardTypes are drafted.
+
+## COUNCIL SESSION
+
+DCR-LEDGER-001 — Full Ledger architecture review. 2026-03-20.
+8 documents reviewed. Zero rejects. Architecture holds.
+
+Documents reviewed:
+  PCB-001               Pre-Council Brief
+  CR-DATA-GOVERNANCE-001
+  CR-UNIVERSAL-INGEST-001
+  CR-POPULATION-MODEL-001
+  CR-CARD-MODEL-001
+  PRO-CARD-MODEL-001
+  STD-CARDTYPE-001
+  PRO-IDENTITY-001
+
+Operator decisions pending:
+  — Population Model final count (7 populations, Context as
+    dimensional extension — recommended)
+  — PRO-IDENTITY-001 cascade integrity amendment
+  — Option A token handshake for AuditForge federation
+  — Type A/B/C data relationship taxonomy
+
+## STACK
+
+url: ledger-card.vercel.app
+repo: dropdownlogistics/ledger
+framework: Next.js 16.2.0 (Turbopack)
+deployment: Vercel (auto-deploy from main)
+database: Neon PostgreSQL (pending CSV wiring)
+auth: None yet (public cards)
+design: CottageHumble
+
+key_files:
+  app/page.js              — Landing page with orbital hero
+  app/page.module.css      — CottageHumble styles
+  app/card/[handle]/page.js — Card route (/card/dk)
+  app/coming-soon/page.js  — Platform verticals page
+  app/layout.js            — Root layout, OG meta, favicon
+  public/favicon.svg       — ℒ on navy, orbital ring
+  public/ledger-og.png     — 1200x630 OG image
+
+## DESIGN
+
+Primary color: #B23531 (crimson)
+Orbital mark: ℒ (script L, amber #C49A3C on navy #0D1B2A)
+Card surface: #10202f
+All CottageHumble tokens apply.
+No white backgrounds. No Inter. No light mode.
+
+## RULES FOR AI COLLABORATORS
+
+1. Ledger is a commercial product. Tone is confident, not documentary.
+2. The card is not a profile. Never describe it as one.
+3. "Generated automatically. Published intentionally." is the governing
+   principle. Do not suggest features that violate it.
+4. Zero-PII is architectural. Do not suggest storing identity fields.
+5. Single-domain cards only. Collections handle multi-domain identity.
+6. Use PowerShell for all file writes. UTF-8 encoding required.
+7. Commit messages: feat/fix/chore prefix, one line, imperative.
+8. Vercel deploys on push to main. Check build logs before moving on.
+9. The ℒ orbital is the brand mark. Preserve it across all surfaces.
+10. Four verticals are live or coming: Ledger, Charter, Pour, Set, Stead.
+    Calling and Purpose are not currently active.
+11. Real people require permission. Sergio is cleared. Others are not.
+12. Parent manifest governs operator context: dropdownlogistics.com/llms.txt
+
+## CANON TERMS (LEDGER-SPECIFIC)
+
+Receiptsume: A verified professional record. Replaces the resume
+  claim with the schema receipt. Coined by Beth Epperson's ChatGPT.
+  Canon 2026-03-18. Core Ledger concept.
+
+AccidentalIntelligence: When a governed, hallucination-free system
+  produces output so unexpected it reads as insight. AuditForge pitch
+  line: "If it ever looked like it was reasoning beyond the data —
+  that wouldn't be AI. That would be Accidental Intelligence."
+  Ratified 2026-03-15.
+
+TrustANDVerify™: Verification is not a check on trust. It is the
+  infrastructure that makes trust possible.
+
+Full glossary: dropdownlogistics.com/llms.txt
+
+## EOF
+# Ledger — ledger-card.vercel.app
+# Dropdown Logistics
+# OperatorManifest v1.0 | 2026-03-23
+# "The architecture does not change. The data does."
