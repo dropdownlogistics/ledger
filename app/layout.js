@@ -1,4 +1,4 @@
-﻿import './globals.css'
+import './globals.css'
 export const metadata = {
   title: 'Ledger - AuditForge Verified',
   description: 'LinkedIn is self-reported. This is verified.',
