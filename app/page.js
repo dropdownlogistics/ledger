@@ -432,6 +432,7 @@ function GeneralizationSection() {
           </div>
         ))}
       </div>
+      <a href="/coming-soon" className={styles.genLink}>View all verticals →</a>
     </section>
   )
 }
