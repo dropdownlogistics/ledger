@@ -1,43 +1,16 @@
 import styles from './card.module.css'
+import { CARDS } from '../../../lib/cards'
+import CARD_TYPE_AUDIT from '../../../lib/cardTypes/CT-AUDIT-001'
 
-// Hardcoded demo data — swap for DB lookup when CSV is wired
-const CARDS = {
-  dk: {
-    handle: 'dk',
-    name: 'Dave Kitchens',
-    initials: 'DK',
-    credentials: 'CPA',
-    title: 'Commission Analyst II',
-    org: 'UMB Bank',
-    tenure: '10+ yrs Internal Audit',
-    badge: 'auditforge',
-    badgeLabel: 'AuditForge Verified',
-    stats: [
-      { val: '8',    label: 'Engagements' },
-      { val: '212',  label: 'Controls'    },
-      { val: '1,557h', label: 'Logged'   },
-      { val: '9',    label: 'Domains'     },
-    ],
-    frameworks: ['SOX', 'COSO', 'NIST CSF', 'IIA Standards', 'Regulation W'],
-    strengths: [
-      { code: 'STR-08', label: 'Judgment',     color: 'crimson' },
-      { code: 'STR-07', label: 'Methodology',  color: 'amber'   },
-      { code: 'STR-03', label: 'Structure',    color: 'violet'  },
-      { code: 'STR-05', label: 'Pattern Recog',color: 'blue'    },
-    ],
-    engagements: [
-      { id: '0001', name: 'Transactions with Affiliates (Reg W)', component: 'Fieldwork',           status: 'completed', hours: 156.25  },
-      { id: '0002', name: 'Social Media',                          component: 'Fieldwork',           status: 'completed', hours: 202.50  },
-      { id: '0003', name: 'Corporate Treasury – Capital Planning', component: 'Fieldwork',           status: 'completed', hours: 182.00  },
-      { id: '0004', name: 'CT File Reviews Continuous Audit',      component: 'Fieldwork',           status: 'completed', hours: 294.50  },
-      { id: '0005', name: 'SOX – Corporate Trust',                 component: 'Fieldwork',           status: 'completed', hours: 68.50   },
-      { id: '0006', name: 'SOX – Fund Services',                   component: 'Fieldwork',           status: 'completed', hours: 19.75   },
-      { id: '0007', name: 'SOX – Entity Level Controls',           component: 'Fieldwork',           status: 'completed', hours: 23.50   },
-      { id: '0008', name: 'Passive Custody / Directed Trustee',    component: 'Fieldwork',           status: 'completed', hours: 108.25  },
-    ],
-    billable_avg: '75.9%',
-    url: 'ledger.dev/dk',
-  }
+const CARD_TYPES = {
+  [CARD_TYPE_AUDIT.cardTypeId]: CARD_TYPE_AUDIT,
+}
+
+const STAT_LABELS = {
+  engagements: 'Engagements',
+  controls:    'Controls',
+  hours:       'Logged',
+  domains:     'Domains',
 }
 
 export async function generateStaticParams() {
@@ -47,16 +20,19 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const card = CARDS[params.handle]
   if (!card) return { title: 'Card not found' }
+  const { credentials, title, name } = card.identity
   return {
-    title: `${card.name} — Ledger`,
-    description: `${card.credentials} · ${card.title} · AuditForge Verified`,
+    title: `${name} — Ledger`,
+    description: `${credentials} · ${title} · ${card.verification.source} Verified`,
   }
 }
 
 export default function CardPage({ params }) {
   const card = CARDS[params.handle]
   if (!card) return <NotFound />
-  return <LedgerCard card={card} />
+  const cardType = CARD_TYPES[card.cardTypeId]
+  if (!cardType) return <NotFound />
+  return <LedgerCard card={card} cardType={cardType} />
 }
 
 /* ── NOT FOUND ── */
@@ -97,8 +73,18 @@ function Badge({ type }) {
 }
 
 /* ── MAIN CARD ── */
-function LedgerCard({ card }) {
+function LedgerCard({ card, cardType }) {
   const tokenClass = { crimson: styles.tokenCrimson, amber: styles.tokenAmber, violet: styles.tokenViolet, blue: styles.tokenBlue }
+
+  const statCells = [
+    ...cardType.statFields.map(f => ({ val: card.stats[f], label: STAT_LABELS[f] })),
+    { val: card[cardType.domainField], label: STAT_LABELS[cardType.domainField] },
+  ]
+
+  const tokens      = card[cardType.tokenField]
+  const frameworks  = card[cardType.frameworkField]
+  const engagements = card[cardType.engagementField]
+  const badgeType   = card.verification.source.toLowerCase()
 
   return (
     <div className={styles.page}>
@@ -113,22 +99,22 @@ function LedgerCard({ card }) {
           {/* Card header */}
           <div className={styles.cardHeader}>
             <OrbitalSmall />
-            <Badge type={card.badge} />
+            <Badge type={badgeType} />
           </div>
 
           {/* Identity */}
           <div className={styles.identity}>
-            <div className={styles.avatar}>{card.initials}</div>
+            <div className={styles.avatar}>{card.identity.initials}</div>
             <div className={styles.identityInfo}>
-              <div className={styles.name}>{card.name}</div>
-              <div className={styles.creds}>{card.credentials} · {card.title}</div>
-              <div className={styles.org}>{card.org} · {card.tenure}</div>
+              <div className={styles.name}>{card.identity.name}</div>
+              <div className={styles.creds}>{card.identity.credentials} · {card.identity.title}</div>
+              <div className={styles.org}>{card.identity.org} · {card.identity.tenure}</div>
             </div>
           </div>
 
           {/* Stats row */}
           <div className={styles.statsRow}>
-            {card.stats.map((s, i) => (
+            {statCells.map((s, i) => (
               <div key={i} className={styles.statCell}>
                 <span className={styles.statVal}>{s.val}</span>
                 <span className={styles.statLbl}>{s.label}</span>
@@ -136,9 +122,9 @@ function LedgerCard({ card }) {
             ))}
           </div>
 
-          {/* Strengths */}
+          {/* Tokens */}
           <div className={styles.tokens}>
-            {card.strengths.map((t, i) => (
+            {tokens.map((t, i) => (
               <span key={i} className={`${styles.token} ${tokenClass[t.color]}`}>
                 {t.code} {t.label}
               </span>
@@ -147,7 +133,7 @@ function LedgerCard({ card }) {
 
           {/* Frameworks */}
           <div className={styles.frameworks}>
-            {card.frameworks.map((f, i) => (
+            {frameworks.map((f, i) => (
               <span key={i} className={styles.fwTag}>{f}</span>
             ))}
           </div>
@@ -155,7 +141,7 @@ function LedgerCard({ card }) {
           {/* Card footer */}
           <div className={styles.cardFooter}>
             <span>{card.url}</span>
-            <span>powered by <strong>AuditForge</strong></span>
+            <span>powered by <strong>{card.verification.source}</strong></span>
           </div>
         </div>
 
@@ -163,7 +149,7 @@ function LedgerCard({ card }) {
         <div className={styles.section}>
           <div className={styles.sectionLabel}>Engagement Record</div>
           <div className={styles.engagementList}>
-            {card.engagements.map((e, i) => (
+            {engagements.map((e, i) => (
               <div key={i} className={styles.engRow}>
                 <div className={styles.engLeft}>
                   <span className={styles.engId}>{e.id}</span>
@@ -192,14 +178,14 @@ function LedgerCard({ card }) {
             </div>
             <div className={styles.perfCard}>
               <div className={styles.perfVal} style={{color:'var(--green)'}}>
-                {card.stats[0].val}
+                {card.stats.engagements}
               </div>
               <div className={styles.perfLbl}>Engagements</div>
               <div className={styles.perfSub}>All COMPLETED status</div>
             </div>
             <div className={styles.perfCard}>
               <div className={styles.perfVal} style={{color:'var(--blue)'}}>
-                {card.stats[2].val}
+                {card.stats.hours}
               </div>
               <div className={styles.perfLbl}>Hours Logged</div>
               <div className={styles.perfSub}>Verified from timesheet data</div>
@@ -210,7 +196,7 @@ function LedgerCard({ card }) {
         {/* ── SHARE / ACTIONS ── */}
         <div className={styles.actions}>
           <a href="mailto:dave@dropdownlogistics.com" className={styles.btnPrimary}>
-            Connect with {card.name.split(' ')[0]} →
+            Connect with {card.identity.name.split(' ')[0]} →
           </a>
           <a href="/" className={styles.btnSecondary}>
             Get your Ledger card
@@ -219,7 +205,7 @@ function LedgerCard({ card }) {
 
         {/* ── FOOTER ── */}
         <div className={styles.pageFooter}>
-          <span>Ledger · powered by <strong>AuditForge</strong> · Dropdown Logistics</span>
+          <span>Ledger · powered by <strong>{card.verification.source}</strong> · Dropdown Logistics</span>
           <span className={styles.footerMeta}>The receiptsume ships.</span>
         </div>
 
