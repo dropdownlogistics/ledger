@@ -5,6 +5,7 @@ export default function Home() {
     <main>
       <Hero />
       <Ticker />
+      <BriefSection />
       <ReceiptsumeSection />
       <BadgeSection />
       <MoatSection />
@@ -152,10 +153,10 @@ function OrbitalHero() {
 
 /* ── TICKER ── */
 const ITEMS = [
-  'RECEIPTSUME','AUDITFORGE VERIFIED','FREE FOREVER','SCHEMA-GOVERNED',
-  'LINKEDIN IS SELF-REPORTED · THIS IS VERIFIED','CROSS-FIRM PORTABILITY',
-  'THE BADGE IS THE BUSINESS','NON-ZERO-SUM','PORTABLE ACROSS FIRMS',
-  'THE CARD IS A READ VIEW',
+  'YOUR LIFE ON THE RECORD','AUDITFORGE VERIFIED','ADMITONE VERIFIED',
+  'FREE FOREVER','SCHEMA-GOVERNED','EVERY DOMAIN · EVERY MOMENT',
+  'CROSS-FIRM PORTABILITY','THE BADGE IS THE BUSINESS','NON-ZERO-SUM',
+  'PORTABLE ACROSS FIRMS','THE CARD IS A READ VIEW',
 ]
 // Doubled for seamless loop
 const TICKER_ITEMS = [...ITEMS, ...ITEMS]
@@ -174,6 +175,24 @@ function Ticker() {
   )
 }
 
+/* ── BRIEF ── */
+function BriefSection() {
+  return (
+    <section className={styles.briefSec}>
+      <div className={styles.briefGrid}>
+        <div className={styles.briefCard}>
+          <div className={styles.briefLabel}>The platform</div>
+          <div className={styles.briefText}>One governed record layer. Any domain. Any moment.</div>
+        </div>
+        <div className={styles.briefCard}>
+          <div className={styles.briefLabel}>The rule</div>
+          <div className={styles.briefText}>If it happened, it belongs here.</div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ── HERO ── */
 function Hero() {
   return (
@@ -185,17 +204,14 @@ function Hero() {
         <div className={styles.heroLeft}>
           <div className={styles.heroEyebrow}>
             <span className={styles.eyebrowLine}/>
-            <span className={styles.eyebrowText}>Dropdown Logistics · AuditForge Verified</span>
+            <span className={styles.eyebrowText}>Ledger — by Dropdown Logistics</span>
           </div>
           <h1 className={styles.heroHeadline}>
-            Your work,<br/><em>verified.</em>
+            Your life.<br/><em>On the record.</em>
           </h1>
           <p className={styles.heroSub}>
-            LinkedIn is self-reported.<br/>
-            <strong>This is verified.</strong>
-          </p>
-          <p className={styles.heroReceiptsume}>
-            This isn't a resume. It's a <span className={styles.receiptsume}>receiptsume.</span>
+            Every domain. Every moment.<br/>
+            <strong>One governed record.</strong>
           </p>
           <div className={styles.heroActions}>
             <a href="#card" className={styles.btnPrimary}>See the card →</a>
@@ -203,18 +219,23 @@ function Hero() {
           </div>
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatLabel}>Powered by</span>
-              <span className={styles.heroStatValue}>AuditForge</span>
+              <span className={styles.heroStatLabel}>Card cost</span>
+              <span className={styles.heroStatValue} style={{color:'var(--green)'}}>Free to log</span>
+            </div>
+            <div className={styles.heroStatDivider}/>
+            <div className={styles.heroStat}>
+              <span className={styles.heroStatLabel}>Ownership</span>
+              <span className={styles.heroStatValue}>You own the data</span>
             </div>
             <div className={styles.heroStatDivider}/>
             <div className={styles.heroStat}>
               <span className={styles.heroStatLabel}>Badge type</span>
-              <span className={styles.heroStatValue}>Schema-governed</span>
+              <span className={styles.heroStatValue}>Verified or noted</span>
             </div>
             <div className={styles.heroStatDivider}/>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatLabel}>Card cost</span>
-              <span className={styles.heroStatValue} style={{color:'var(--green)'}}>Free</span>
+              <span className={styles.heroStatLabel}>Philosophy</span>
+              <span className={styles.heroStatValue}>No feed, no flex</span>
             </div>
           </div>
         </div>
@@ -228,59 +249,91 @@ function Hero() {
   )
 }
 
-/* ── RECEIPTSUME SECTION ── */
+/* ── RECEIPTSUME SECTION — TWO-CARD DEMO ── */
 function ReceiptsumeSection() {
   return (
     <section className={styles.receiptsumeSec} id="card">
-      <div className={styles.secLabel}>The Credential</div>
-      <h2 className={styles.secTitle}>Not self-reported.<br/><em>Data-derived.</em></h2>
+      <div className={styles.secLabel}>The Card</div>
+      <h2 className={styles.secTitle}>Two domains.<br/><em>One platform.</em></h2>
       <p className={styles.secBody}>
-        Every stat on this card comes from a governed schema — not a text field, not a
-        self-assessment. Completed engagements. Approved controls. Frameworks mapped.
-        The badge doesn't fire until the work is done.
+        Same card shell. Different domain data. Different accent. The platform
+        doesn't know what kind of card it holds. That's the design.
       </p>
-      <div className={styles.demoCard}>
-        <div className={styles.demoCardTop}>
-          <svg width="44" height="44" viewBox="0 0 44 44" style={{overflow:'visible'}}>
-            <ellipse cx="22" cy="22" rx="17" ry="5.5" fill="none"
-              stroke="rgba(196,154,60,0.3)" strokeWidth="0.75" transform="rotate(-20 22 22)"/>
-            <circle cx="38.5" cy="19.5" r="2.5" fill="#C49A3C" opacity="0.9"/>
-            <text x="22" y="29" textAnchor="middle" fontSize="22"
-              fontFamily="Georgia,serif" fontStyle="italic" fill="#C49A3C">ℒ</text>
-          </svg>
-          <div className={styles.badgeGreen}>✅ AuditForge Verified</div>
-        </div>
-        <div className={styles.demoCardBody}>
-          <div className={styles.demoCardAvatar}>DK</div>
-          <div className={styles.demoCardInfo}>
-            <div className={styles.demoCardName}>Dave Kitchens</div>
-            <div className={styles.demoCardTitle}>CPA · Commission Analyst II</div>
-            <div className={styles.demoCardOrg}>UMB Bank · 10+ yrs Internal Audit</div>
+      <div className={styles.twoCardRow}>
+        {/* ── AUDIT CARD ── */}
+        <div className={`${styles.demoCard} ${styles.demoCardCrimson}`}>
+          <div className={styles.demoCardTop}>
+            <svg width="44" height="44" viewBox="0 0 44 44" style={{overflow:'visible'}}>
+              <ellipse cx="22" cy="22" rx="17" ry="5.5" fill="none"
+                stroke="rgba(178,53,49,0.3)" strokeWidth="0.75" transform="rotate(-20 22 22)"/>
+              <circle cx="38.5" cy="19.5" r="2.5" fill="#B23531" opacity="0.9"/>
+              <text x="22" y="29" textAnchor="middle" fontSize="22"
+                fontFamily="Georgia,serif" fontStyle="italic" fill="#B23531">ℒ</text>
+            </svg>
+            <div className={styles.badgeGreen}>✅ AuditForge Verified</div>
+          </div>
+          <div className={styles.demoCardBody}>
+            <div className={styles.demoCardAvatar}>DK</div>
+            <div className={styles.demoCardInfo}>
+              <div className={styles.demoCardName}>Dave Kitchens</div>
+              <div className={styles.demoCardTitle}>CPA · Commission Analyst II</div>
+              <div className={styles.demoCardOrg}>AuditForge Verified</div>
+            </div>
+          </div>
+          <div className={styles.demoCardStats}>
+            <div className={styles.demoStat}><span className={styles.demoStatVal}>4</span><span className={styles.demoStatLbl}>Engagements</span></div>
+            <div className={styles.demoStatDiv}/>
+            <div className={styles.demoStat}><span className={styles.demoStatVal}>212</span><span className={styles.demoStatLbl}>Controls</span></div>
+            <div className={styles.demoStatDiv}/>
+            <div className={styles.demoStat}><span className={styles.demoStatVal}>789h</span><span className={styles.demoStatLbl}>Logged</span></div>
+          </div>
+          <div className={styles.demoCardTokens}>
+            <span className={styles.tokenCrimson}>SOX</span>
+            <span className={styles.tokenCrimson}>COSO</span>
+            <span className={styles.tokenCrimson}>IIA Standards</span>
+          </div>
+          <div className={styles.demoCardFooter}>
+            <span>ledger.dev/dk</span>
+            <span>powered by <strong>AuditForge</strong></span>
           </div>
         </div>
-        <div className={styles.demoCardStats}>
-          <div className={styles.demoStat}><span className={styles.demoStatVal}>4</span><span className={styles.demoStatLbl}>Engagements</span></div>
-          <div className={styles.demoStatDiv}/>
-          <div className={styles.demoStat}><span className={styles.demoStatVal}>212</span><span className={styles.demoStatLbl}>Controls</span></div>
-          <div className={styles.demoStatDiv}/>
-          <div className={styles.demoStat}><span className={styles.demoStatVal}>789h</span><span className={styles.demoStatLbl}>Logged</span></div>
-          <div className={styles.demoStatDiv}/>
-          <div className={styles.demoStat}><span className={styles.demoStatVal}>9</span><span className={styles.demoStatLbl}>Domains</span></div>
-        </div>
-        <div className={styles.demoCardTokens}>
-          <span className={styles.tokenCrimson}>STR-08 Judgment</span>
-          <span className={styles.tokenAmber}>STR-07 Methodology</span>
-          <span className={styles.tokenViolet}>STR-03 Structure</span>
-        </div>
-        <div className={styles.demoCardFrameworks}>
-          <span className={styles.frameworkTag}>SOX</span>
-          <span className={styles.frameworkTag}>COSO</span>
-          <span className={styles.frameworkTag}>NIST CSF</span>
-          <span className={styles.frameworkTag}>IIA Standards</span>
-        </div>
-        <div className={styles.demoCardFooter}>
-          <span>ledger.dev/dk</span>
-          <span>powered by <strong>AuditForge</strong></span>
+
+        {/* ── ADMITONE STUB CARD ── */}
+        <div className={`${styles.demoCard} ${styles.demoCardAmber}`}>
+          <div className={styles.demoCardTop}>
+            <svg width="44" height="44" viewBox="0 0 44 44" style={{overflow:'visible'}}>
+              <ellipse cx="22" cy="22" rx="17" ry="5.5" fill="none"
+                stroke="rgba(196,154,60,0.3)" strokeWidth="0.75" transform="rotate(-20 22 22)"/>
+              <circle cx="38.5" cy="19.5" r="2.5" fill="#C49A3C" opacity="0.9"/>
+              <text x="22" y="29" textAnchor="middle" fontSize="22"
+                fontFamily="Georgia,serif" fontStyle="italic" fill="#C49A3C">ℒ</text>
+            </svg>
+            <div className={styles.badgeAmber}>✅ Setlist Verified</div>
+          </div>
+          <div className={styles.demoCardBody}>
+            <div className={styles.demoCardAvatarAmber}>🎵</div>
+            <div className={styles.demoCardInfo}>
+              <div className={styles.demoCardName}>Radiohead</div>
+              <div className={styles.demoCardTitleAmber}>Red Rocks Amphitheatre</div>
+              <div className={styles.demoCardOrg}>Sep 14, 2024</div>
+            </div>
+          </div>
+          <div className={styles.demoCardStats}>
+            <div className={styles.demoStat}><span className={styles.demoStatValAmber}>18</span><span className={styles.demoStatLbl}>Songs</span></div>
+            <div className={styles.demoStatDiv}/>
+            <div className={styles.demoStat}><span className={styles.demoStatValAmber}>2h 14m</span><span className={styles.demoStatLbl}>Runtime</span></div>
+            <div className={styles.demoStatDiv}/>
+            <div className={styles.demoStat}><span className={styles.demoStatValAmber}>GA</span><span className={styles.demoStatLbl}>Section</span></div>
+          </div>
+          <div className={styles.demoCardTokens}>
+            <span className={styles.tokenAmber}>OK Computer</span>
+            <span className={styles.tokenAmber}>Kid A</span>
+            <span className={styles.tokenAmber}>In Rainbows</span>
+          </div>
+          <div className={styles.demoCardFooter}>
+            <span>ledger.dev/stub/radiohead-redrocks</span>
+            <span>powered by <strong>AdmitOne</strong></span>
+          </div>
         </div>
       </div>
     </section>
@@ -411,22 +464,27 @@ function BusinessModelSection() {
 /* ── GENERALIZATION ── */
 function GeneralizationSection() {
   const verts = [
-    { icon:'📋', title:'Audit Card',   sub:'Controls · Engagements · Frameworks', status:'BUILDING NOW', sc:'var(--green)',  sb:'rgba(74,158,107,0.12)',  active:true  },
-    { icon:'🥃', title:'Drinksumé',    sub:'Hospitality · SergeBook',             status:'SHIPPED',      sc:'var(--blue)',   sb:'rgba(107,157,194,0.12)', active:true  },
-    { icon:'💼', title:'Deal Card',    sub:'Transactions · Asset classes',        status:'QUEUED',       sc:'var(--steel)',  sb:'rgba(245,241,235,0.05)', active:false },
-    { icon:'⚖️', title:'Case Card',    sub:'Cases · Practice areas · Outcomes',   status:'QUEUED',       sc:'var(--steel)',  sb:'rgba(245,241,235,0.05)', active:false },
-    { icon:'📊', title:'Project Card', sub:'Engagements · Domains · Value',       status:'QUEUED',       sc:'var(--steel)',  sb:'rgba(245,241,235,0.05)', active:false },
+    { icon:'📋', title:'Ledger',    sub:'Internal Audit',            status:'LIVE',    sc:'var(--crimson)', sb:'rgba(178,53,49,0.12)',  active:true  },
+    { icon:'🎫', title:'AdmitOne',  sub:'Events & Memory',           status:'LIVE',    sc:'var(--amber)',   sb:'rgba(196,154,60,0.12)', active:true, url:'https://admitone.vercel.app' },
+    { icon:'🧠', title:'Charter',   sub:'Therapy & Counseling',      status:'COMING',  sc:'var(--steel)',   sb:'rgba(245,241,235,0.05)', active:false },
+    { icon:'🥃', title:'Pour',      sub:'Hospitality',               status:'COMING',  sc:'var(--steel)',   sb:'rgba(245,241,235,0.05)', active:false },
+    { icon:'🎵', title:'Set',       sub:'Music & Education',         status:'COMING',  sc:'var(--steel)',   sb:'rgba(245,241,235,0.05)', active:false },
+    { icon:'🌿', title:'Stead',     sub:'Specialty Plant Care',      status:'COMING',  sc:'var(--steel)',   sb:'rgba(245,241,235,0.05)', active:false },
   ]
   return (
     <section className={styles.genSec}>
-      <div className={styles.secLabel}>The Platform</div>
-      <h2 className={styles.secTitle}>Audit ships first.</h2>
-      <p className={styles.secBody}>One verified badge system. Multiple professional verticals. The infrastructure is built once.</p>
+      <div className={styles.secLabel}>THE PLATFORM</div>
+      <h2 className={styles.secTitle}>One record layer.<br/><em>Every domain.</em></h2>
+      <p className={styles.secBody}>
+        AuditForge generates Audit Cards. AdmitOne generates Stub Cards.
+        Charter, Pour, Set, and Stead are next. The platform doesn't know
+        what kind of card it holds. That's the design.
+      </p>
       <div className={styles.genGrid}>
         {verts.map((v,i) => (
           <div key={i} className={`${styles.genCard} ${v.active?styles.genCardActive:''}`}>
             <div className={styles.genIcon}>{v.icon}</div>
-            <div className={styles.genTitle}>{v.title}</div>
+            <div className={styles.genTitle}>{v.url ? <a href={v.url} className={styles.genTitleLink} style={{color:v.sc}}>{v.title}</a> : v.title}</div>
             <div className={styles.genSub}>{v.sub}</div>
             <div className={styles.genStatus} style={{color:v.sc,background:v.sb}}>{v.status}</div>
           </div>
@@ -469,9 +527,9 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerBrand}>
-        Ledger · powered by <span>AuditForge</span> · Dropdown Logistics
+        Ledger · <span>Dropdown Logistics</span>
       </div>
-      <div className={styles.footerMeta}>The receiptsume ships.</div>
+      <div className={styles.footerMeta}>Your life. On the record.</div>
     </footer>
   )
 }

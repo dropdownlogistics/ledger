@@ -229,13 +229,59 @@
   opacity: 0.7;
 }
 
-/* â”€â”€ RECEIPTSUME / DEMO CARD â”€â”€ */
+/* ── BRIEF ── */
+.briefSec {
+  padding: 48px 48px 0;
+  display: flex;
+  justify-content: center;
+}
+.briefGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 720px;
+  width: 100%;
+}
+.briefCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+.briefLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+.briefText {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(245,241,235,0.7);
+  line-height: 1.5;
+}
+
+/* ── RECEIPTSUME / DEMO CARD ── */
 .receiptsumeSec {
   padding: 72px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: rgba(0,0,0,0.15);
+}
+.twoCardRow {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 920px;
 }
 .demoCard {
   width: 100%;
@@ -246,7 +292,11 @@
   border-radius: 14px;
   box-shadow: 0 24px 56px rgba(0,0,0,0.4);
   padding: 22px;
+  flex: 1;
+  min-width: 300px;
 }
+.demoCardCrimson { border-top-color: var(--crimson); }
+.demoCardAmber { border-top-color: var(--amber); }
 .demoCardTop { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
 .badgeGreen {
   font-family: var(--font-mono);
@@ -284,6 +334,37 @@
 .frameworkTag { font-family: var(--font-mono); font-size: 9px; padding: 3px 7px; border-radius: 3px; border: 1px solid var(--border); color: rgba(245,241,235,0.4); }
 .demoCardFooter { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--steel); padding-top: 14px; border-top: 1px solid var(--border); }
 .demoCardFooter strong { color: var(--crimson); }
+.demoCardAmber .demoCardFooter strong { color: var(--amber); }
+.badgeAmber {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--amber);
+  background: rgba(196,154,60,0.1);
+  padding: 5px 9px;
+  border-radius: 4px;
+}
+.demoCardAvatarAmber {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(196,154,60,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.demoCardTitleAmber {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--amber);
+  margin-bottom: 2px;
+}
+.demoStatValAmber {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--amber);
+}
 
 /* â”€â”€ BADGE SECTION â”€â”€ */
 .badgeSec { padding: 72px 48px; display: flex; flex-direction: column; align-items: center; }
@@ -342,6 +423,12 @@
 .genTitle { font-family: var(--font-display); font-size: 15px; font-weight: 700; }
 .genSub { font-family: var(--font-mono); font-size: 9px; color: var(--steel); line-height: 1.5; }
 .genStatus { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; padding: 3px 7px; border-radius: 3px; margin-top: 6px; display: inline-block; width: fit-content; }
+.genTitleLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.genTitleLink:hover { text-decoration: underline; }
 .genLink {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -405,6 +492,10 @@
   padding-top: 96px;
   padding-bottom: 96px; padding: 48px 28px; min-height: 60vh; padding-top: 80px; }
   .moatInner { grid-template-columns: 1fr; gap: 36px; }
+  .briefSec { padding: 36px 24px 0; }
+  .briefGrid { grid-template-columns: 1fr; }
+  .twoCardRow { flex-direction: column; align-items: center; }
+  .demoCard { min-width: 0; }
   .receiptsumeSec,.badgeSec,.moatSec,.flywheelSec,.bizSec,.genSec,.ctaSec { padding: 56px 24px; }
   .bizCardFeatured { grid-column: auto; }
   .footer { padding: 28px 24px; flex-direction: column; text-align: center; }

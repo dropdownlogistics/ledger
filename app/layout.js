@@ -1,13 +1,13 @@
 import './globals.css'
 export const metadata = {
-  title: 'Ledger - AuditForge Verified',
-  description: 'LinkedIn is self-reported. This is verified.',
+  title: 'Ledger — Your life. On the record.',
+  description: 'Your life. On the record. Every domain. Every moment. One governed record.',
   icons: {
     icon: '/favicon.svg',
   },
   openGraph: {
-    title: 'Ledger - AuditForge Verified',
-    description: 'LinkedIn is self-reported. This is verified.',
+    title: 'Ledger — Your life. On the record.',
+    description: 'Your life. On the record. Every domain. Every moment. One governed record.',
     images: ['/ledger-og.png'],
     url: 'https://ledger-card.vercel.app',
   },
