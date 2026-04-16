@@ -1,16 +1,27 @@
 import styles from './card.module.css'
 import { CARDS } from '../../../lib/cards'
 import CARD_TYPE_AUDIT from '../../../lib/cardTypes/CT-AUDIT-001'
+import CARD_TYPE_CHARTER from '../../../lib/cardTypes/CT-CHARTER-001'
+import CARD_TYPE_SET from '../../../lib/cardTypes/CT-SET-001'
 
 const CARD_TYPES = {
-  [CARD_TYPE_AUDIT.cardTypeId]: CARD_TYPE_AUDIT,
+  [CARD_TYPE_AUDIT.cardTypeId]:   CARD_TYPE_AUDIT,
+  [CARD_TYPE_CHARTER.cardTypeId]: CARD_TYPE_CHARTER,
+  [CARD_TYPE_SET.cardTypeId]:     CARD_TYPE_SET,
 }
 
 const STAT_LABELS = {
-  engagements: 'Engagements',
-  controls:    'Controls',
-  hours:       'Logged',
-  domains:     'Domains',
+  engagements:  'Engagements',
+  controls:     'Controls',
+  hours:        'Logged',
+  domains:      'Domains',
+  sessions:     'Sessions',
+  years:        'Years',
+  clients:      'Clients',
+  specialties:  'Specialties',
+  students:     'Students',
+  lessons:      'Lessons',
+  instruments:  'Instruments',
 }
 
 export async function generateStaticParams() {
@@ -60,11 +71,11 @@ function OrbitalSmall() {
 }
 
 /* ── BADGE ── */
-function Badge({ type }) {
-  if (type === 'auditforge') return (
-    <span className={`${styles.badge} ${styles.badgeGreen}`}>✅ AuditForge Verified</span>
+function Badge({ verification }) {
+  if (verification.status === 'VERIFIED') return (
+    <span className={`${styles.badge} ${styles.badgeGreen}`}>✅ {verification.source} Verified</span>
   )
-  if (type === 'connected') return (
+  if (verification.status === 'CONNECTED') return (
     <span className={`${styles.badge} ${styles.badgeBlue}`}>🔗 Third-Party Connected</span>
   )
   return (
@@ -74,7 +85,7 @@ function Badge({ type }) {
 
 /* ── MAIN CARD ── */
 function LedgerCard({ card, cardType }) {
-  const tokenClass = { crimson: styles.tokenCrimson, amber: styles.tokenAmber, violet: styles.tokenViolet, blue: styles.tokenBlue }
+  const tokenClass = { crimson: styles.tokenCrimson, amber: styles.tokenAmber, violet: styles.tokenViolet, blue: styles.tokenBlue, green: styles.tokenGreen }
 
   const statCells = [
     ...cardType.statFields.map(f => ({ val: card.stats[f], label: STAT_LABELS[f] })),
@@ -84,7 +95,9 @@ function LedgerCard({ card, cardType }) {
   const tokens      = card[cardType.tokenField]
   const frameworks  = card[cardType.frameworkField]
   const engagements = card[cardType.engagementField]
-  const badgeType   = card.verification.source.toLowerCase()
+  const totalHours  = engagements.reduce((sum, e) => sum + e.hours, 0)
+  const completedCount = engagements.filter(e => e.status === 'completed').length
+  const activeCount    = engagements.filter(e => e.status === 'active').length
 
   return (
     <div className={styles.page}>
@@ -99,7 +112,7 @@ function LedgerCard({ card, cardType }) {
           {/* Card header */}
           <div className={styles.cardHeader}>
             <OrbitalSmall />
-            <Badge type={badgeType} />
+            <Badge verification={card.verification} />
           </div>
 
           {/* Identity */}
@@ -165,7 +178,7 @@ function LedgerCard({ card, cardType }) {
           </div>
         </div>
 
-        {/* ── BILLABLE SUMMARY ── */}
+        {/* ── PERFORMANCE SUMMARY ── */}
         <div className={styles.section}>
           <div className={styles.sectionLabel}>Performance</div>
           <div className={styles.perfGrid}>
@@ -174,21 +187,20 @@ function LedgerCard({ card, cardType }) {
                 {card.billable_avg}
               </div>
               <div className={styles.perfLbl}>Avg Billable %</div>
-              <div className={styles.perfSub}>75% goal · 9 months tracked</div>
             </div>
             <div className={styles.perfCard}>
               <div className={styles.perfVal} style={{color:'var(--green)'}}>
-                {card.stats.engagements}
+                {engagements.length}
               </div>
-              <div className={styles.perfLbl}>Engagements</div>
-              <div className={styles.perfSub}>All COMPLETED status</div>
+              <div className={styles.perfLbl}>{cardType.engagementField === 'engagements_list' ? 'Engagements' : 'Records'}</div>
+              <div className={styles.perfSub}>{completedCount} completed · {activeCount} active</div>
             </div>
             <div className={styles.perfCard}>
               <div className={styles.perfVal} style={{color:'var(--blue)'}}>
-                {card.stats.hours}
+                {totalHours.toLocaleString()}h
               </div>
               <div className={styles.perfLbl}>Hours Logged</div>
-              <div className={styles.perfSub}>Verified from timesheet data</div>
+              <div className={styles.perfSub}>{card.verification.status === 'VERIFIED' ? `${card.verification.source} verified` : 'Self-reported'}</div>
             </div>
           </div>
         </div>

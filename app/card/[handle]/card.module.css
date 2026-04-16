@@ -102,6 +102,7 @@
 .tokenAmber   { background: rgba(196,154,60,0.12); color: var(--amber);   }
 .tokenViolet  { background: rgba(138,108,201,0.12);color: var(--violet);  }
 .tokenBlue    { background: rgba(107,157,194,0.12);color: var(--blue);    }
+.tokenGreen   { background: rgba(74,158,107,0.12); color: var(--green);   }
 
 /* Frameworks */
 .frameworks { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 22px; }
