@@ -29,7 +29,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const card = CARDS[params.handle]
+  const { handle } = await params
+  const card = CARDS[handle]
   if (!card) return { title: 'Card not found' }
   const { credentials, title, name } = card.identity
   return {
@@ -38,8 +39,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function CardPage({ params }) {
-  const card = CARDS[params.handle]
+export default async function CardPage({ params }) {
+  const { handle } = await params
+  const card = CARDS[handle]
   if (!card) return <NotFound />
   const cardType = CARD_TYPES[card.cardTypeId]
   if (!cardType) return <NotFound />
