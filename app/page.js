@@ -7,8 +7,6 @@ export default function Home() {
       <Ticker />
       <BriefSection />
       <ReceiptsumeSection />
-      <BadgeSection />
-      <MoatSection />
       <FlywheelSection />
       <BusinessModelSection />
       <GeneralizationSection />
@@ -334,69 +332,6 @@ function ReceiptsumeSection() {
             <span>ledger.dev/stub/radiohead-redrocks</span>
             <span>powered by <strong>AdmitOne</strong></span>
           </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ── BADGE SECTION ── */
-function BadgeSection() {
-  const badges = [
-    { icon:'✅', ic:'var(--green)',  title:'AuditForge Verified',   desc:'Sourced directly from AuditForge. Engagement completed, controls approved, hours logged, frameworks mapped. The schema is the truth.',       rl:'Requires',     r:'Engagement COMPLETED · Controls APPROVED · Hours logged' },
-    { icon:'🔗', ic:'var(--blue)',   title:'Third-Party Connected', desc:'Verified against TeamMate, Pentana, AuditBoard, or Workiva. The source system is clearly attributed. Not AuditForge — but still governed.',  rl:'Sources',      r:'TeamMate · Pentana · AuditBoard · Workiva' },
-    { icon:'✏️', ic:'var(--steel)', title:'Self-Reported',          desc:'Manual entry. Clearly labeled. Not penalized — the card still works, the context is always present. Honesty is built into the system.',       rl:'Upgrade path', r:'Connect your platform → badge auto-upgrades' },
-  ]
-  return (
-    <section className={styles.badgeSec} id="how">
-      <div className={styles.secLabel}>The Badge System</div>
-      <h2 className={styles.secTitle}>Honest by design.</h2>
-      <p className={styles.secBody}>Every card shows exactly where the data came from. No ambiguity. No inflation. The source is always labeled.</p>
-      <div className={styles.badgeGrid}>
-        {badges.map((b,i) => (
-          <div key={i} className={styles.badgeCard}>
-            <div className={styles.badgeIcon} style={{color:b.ic}}>{b.icon}</div>
-            <div className={styles.badgeTitle}>{b.title}</div>
-            <div className={styles.badgeDesc}>{b.desc}</div>
-            <div className={styles.badgeReq}>
-              <span className={styles.badgeReqLabel}>{b.rl}</span>
-              <span>{b.r}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-/* ── MOAT ── */
-function MoatSection() {
-  return (
-    <section className={styles.moatSec}>
-      <div className={styles.moatInner}>
-        <div className={styles.moatLeft}>
-          <div className={styles.secLabel}>The Moat</div>
-          <h2 className={styles.secTitle} style={{textAlign:'left'}}>The badge<br/><em>is the business.</em></h2>
-          <p className={styles.secBody} style={{textAlign:'left',maxWidth:'400px',margin:'0 0 0 0'}}>
-            Manual cards look like the card. AuditForge cards <em>are</em> the card. That distinction compounds.
-          </p>
-          <p className={styles.moatPull}>The auditor becomes the <strong>distribution channel.</strong></p>
-          <p className={styles.moatBody}>Every auditor who shares their Ledger card is a sales impression for AuditForge. Organic top-of-funnel. Cost: zero.</p>
-        </div>
-        <div className={styles.moatRight}>
-          {[
-            { val:'∞', c:'var(--amber)',   d:'Sales impressions per shared card · Cost: $0' },
-            { val:'2', c:'var(--crimson)', d:'Revenue streams · Firm subscription + individual portability · One dataset' },
-            { val:'↑', c:'var(--green)',   d:'Pull from below · Auditors request AuditForge at new firms · Individual-driven adoption' },
-          ].map((s,i) => (
-            <div key={i}>
-              {i > 0 && <div className={styles.moatStatDiv}/>}
-              <div className={styles.moatStat}>
-                <span className={styles.moatStatVal} style={{color:s.c}}>{s.val}</span>
-                <span className={styles.moatStatDesc}>{s.d}</span>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
