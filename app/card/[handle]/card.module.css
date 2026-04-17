@@ -54,6 +54,7 @@
   border-radius: 4px;
 }
 .badgeGreen { color: var(--green);  background: rgba(74,158,107,0.1);  }
+.badgeAmber { color: var(--amber);  background: rgba(196,154,60,0.1);  }
 .badgeBlue  { color: var(--blue);   background: rgba(107,157,194,0.1); }
 .badgeSteel { color: var(--steel);  background: rgba(107,123,141,0.1); }
 

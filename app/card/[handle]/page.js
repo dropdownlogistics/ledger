@@ -3,11 +3,13 @@ import { CARDS } from '../../../lib/cards'
 import CARD_TYPE_AUDIT from '../../../lib/cardTypes/CT-AUDIT-001'
 import CARD_TYPE_CHARTER from '../../../lib/cardTypes/CT-CHARTER-001'
 import CARD_TYPE_SET from '../../../lib/cardTypes/CT-SET-001'
+import CARD_TYPE_SLOPESTAT from '../../../lib/cardTypes/CT-SLOPESTAT-001'
 
 const CARD_TYPES = {
-  [CARD_TYPE_AUDIT.cardTypeId]:   CARD_TYPE_AUDIT,
-  [CARD_TYPE_CHARTER.cardTypeId]: CARD_TYPE_CHARTER,
-  [CARD_TYPE_SET.cardTypeId]:     CARD_TYPE_SET,
+  [CARD_TYPE_AUDIT.cardTypeId]:     CARD_TYPE_AUDIT,
+  [CARD_TYPE_CHARTER.cardTypeId]:   CARD_TYPE_CHARTER,
+  [CARD_TYPE_SET.cardTypeId]:       CARD_TYPE_SET,
+  [CARD_TYPE_SLOPESTAT.cardTypeId]: CARD_TYPE_SLOPESTAT,
 }
 
 const STAT_LABELS = {
@@ -22,6 +24,9 @@ const STAT_LABELS = {
   students:     'Students',
   lessons:      'Lessons',
   instruments:  'Instruments',
+  peakSpeed:    'Peak Speed',
+  mountains:    'Mountains',
+  boards:       'Boards',
 }
 
 export async function generateStaticParams() {
@@ -77,6 +82,9 @@ function Badge({ verification }) {
   if (verification.status === 'VERIFIED') return (
     <span className={`${styles.badge} ${styles.badgeGreen}`}>✅ {verification.source} Verified</span>
   )
+  if (verification.status === 'HIGH_CONFIDENCE') return (
+    <span className={`${styles.badge} ${styles.badgeAmber}`}>◈ High Confidence</span>
+  )
   if (verification.status === 'CONNECTED') return (
     <span className={`${styles.badge} ${styles.badgeBlue}`}>🔗 Third-Party Connected</span>
   )
@@ -100,6 +108,9 @@ function LedgerCard({ card, cardType }) {
   const totalHours  = engagements.reduce((sum, e) => sum + e.hours, 0)
   const completedCount = engagements.filter(e => e.status === 'completed').length
   const activeCount    = engagements.filter(e => e.status === 'active').length
+
+  const isSlopestat = cardType.vertical === 'slopestat'
+  const topSpeed    = isSlopestat ? Math.max(...engagements.map(e => e.hours)) : null
 
   return (
     <div className={styles.page}>
@@ -162,7 +173,7 @@ function LedgerCard({ card, cardType }) {
 
         {/* ── ENGAGEMENT RECORD ── */}
         <div className={styles.section}>
-          <div className={styles.sectionLabel}>Engagement Record</div>
+          <div className={styles.sectionLabel}>{isSlopestat ? 'Session Record' : 'Engagement Record'}</div>
           <div className={styles.engagementList}>
             {engagements.map((e, i) => (
               <div key={i} className={styles.engRow}>
@@ -172,7 +183,7 @@ function LedgerCard({ card, cardType }) {
                 </div>
                 <div className={styles.engRight}>
                   <span className={styles.engComponent}>{e.component}</span>
-                  <span className={styles.engHours}>{e.hours.toFixed(2)}h</span>
+                  <span className={styles.engHours}>{isSlopestat ? `${e.hours} mph` : `${e.hours.toFixed(2)}h`}</span>
                   <span className={styles.engStatus}>✓</span>
                 </div>
               </div>
@@ -186,23 +197,27 @@ function LedgerCard({ card, cardType }) {
           <div className={styles.perfGrid}>
             <div className={styles.perfCard}>
               <div className={styles.perfVal} style={{color:'var(--amber)'}}>
-                {card.billable_avg}
+                {isSlopestat ? card.stats.peakSpeed : card.billable_avg}
               </div>
-              <div className={styles.perfLbl}>Avg Billable %</div>
+              <div className={styles.perfLbl}>{isSlopestat ? 'Peak Speed' : 'Avg Billable %'}</div>
             </div>
             <div className={styles.perfCard}>
               <div className={styles.perfVal} style={{color:'var(--green)'}}>
                 {engagements.length}
               </div>
-              <div className={styles.perfLbl}>{cardType.engagementField === 'engagements_list' ? 'Engagements' : 'Records'}</div>
+              <div className={styles.perfLbl}>{isSlopestat ? 'Sessions' : (cardType.engagementField === 'engagements_list' ? 'Engagements' : 'Records')}</div>
               <div className={styles.perfSub}>{completedCount} completed · {activeCount} active</div>
             </div>
             <div className={styles.perfCard}>
               <div className={styles.perfVal} style={{color:'var(--blue)'}}>
-                {totalHours.toLocaleString()}h
+                {isSlopestat ? `${topSpeed.toFixed(1)} mph` : `${totalHours.toLocaleString()}h`}
               </div>
-              <div className={styles.perfLbl}>Hours Logged</div>
-              <div className={styles.perfSub}>{card.verification.status === 'VERIFIED' ? `${card.verification.source} verified` : 'Self-reported'}</div>
+              <div className={styles.perfLbl}>{isSlopestat ? 'Top Speed' : 'Hours Logged'}</div>
+              <div className={styles.perfSub}>{
+                card.verification.status === 'VERIFIED'        ? `${card.verification.source} verified` :
+                card.verification.status === 'HIGH_CONFIDENCE' ? `${card.verification.source} · High Confidence` :
+                'Self-reported'
+              }</div>
             </div>
           </div>
         </div>

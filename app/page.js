@@ -401,6 +401,7 @@ function GeneralizationSection() {
   const verts = [
     { icon:'📋', title:'Ledger',    sub:'Internal Audit',            status:'LIVE',    sc:'var(--crimson)', sb:'rgba(178,53,49,0.12)',  active:true  },
     { icon:'🎫', title:'AdmitOne',  sub:'Events & Memory',           status:'LIVE',    sc:'var(--amber)',   sb:'rgba(196,154,60,0.12)', active:true, url:'https://admitone.vercel.app' },
+    { icon:'🏔️', title:'SlopeStat', sub:'Snow Sports Performance',   status:'LIVE',    sc:'var(--amber)',   sb:'rgba(196,154,60,0.12)', active:true, url:'https://slopestat.vercel.app' },
     { icon:'🧠', title:'Charter',   sub:'Therapy & Counseling',      status:'COMING',  sc:'var(--steel)',   sb:'rgba(245,241,235,0.05)', active:false },
     { icon:'🥃', title:'Pour',      sub:'Hospitality',               status:'COMING',  sc:'var(--steel)',   sb:'rgba(245,241,235,0.05)', active:false },
     { icon:'🎵', title:'Set',       sub:'Music & Education',         status:'COMING',  sc:'var(--steel)',   sb:'rgba(245,241,235,0.05)', active:false },
@@ -411,9 +412,9 @@ function GeneralizationSection() {
       <div className={styles.secLabel}>THE PLATFORM</div>
       <h2 className={styles.secTitle}>One record layer.<br/><em>Every domain.</em></h2>
       <p className={styles.secBody}>
-        AuditForge generates Audit Cards. AdmitOne generates Stub Cards.
-        Charter, Pour, Set, and Stead are next. The platform doesn't know
-        what kind of card it holds. That's the design.
+        AuditForge, AdmitOne, and SlopeStat are live. Charter, Pour, Set,
+        and Stead are next. The platform doesn't know what kind of card it
+        holds. That's the design.
       </p>
       <div className={styles.genGrid}>
         {verts.map((v,i) => (

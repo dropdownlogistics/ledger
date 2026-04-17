@@ -1,7 +1,7 @@
 import styles from './coming-soon.module.css'
 export const metadata = {
   title: 'The Platform – Ledger',
-  description: 'One verified badge system. Six professional verticals. The infrastructure is built once.',
+  description: 'One verified badge system. Seven professional verticals. The infrastructure is built once.',
 }
 
 const VERTICALS = [
@@ -29,6 +29,18 @@ const VERTICALS = [
     status: 'live',
     url: 'https://admitone.vercel.app',
     demos: ['Radiohead · Red Rocks Amphitheatre · Sep 14, 2024'],
+  },
+  {
+    name: 'SlopeStat',
+    tag: 'Snow Sports Performance',
+    color: '#C49A3C',
+    headline: 'Your rides.',
+    headlineEm: 'Verified.',
+    sub: 'Log sessions, track boards, build your Rider Card. Geekbench for snow sports gear.',
+    distinction: 'Not a GPS tracker. A governed performance record.',
+    status: 'live',
+    url: 'https://slopestat.vercel.app',
+    demos: ['Toddy K · BSOD 159 · 64.9 mph · Revelstoke BC'],
   },
   {
     name: 'Charter',
@@ -115,7 +127,7 @@ export default function ComingSoon() {
         </div>
         <h1 className={styles.platformTitle}>
           One badge system.<br/>
-          <em>Six verticals.</em>
+          <em>Seven verticals.</em>
         </h1>
         <p className={styles.platformSub}>
           The architecture is built once. The data changes.
@@ -123,7 +135,7 @@ export default function ComingSoon() {
         </p>
         <div className={styles.platformMeta}>
           <div className={styles.metaItem}>
-            <span className={styles.metaVal} style={{color:'var(--green)'}}>2</span>
+            <span className={styles.metaVal} style={{color:'var(--green)'}}>3</span>
             <span className={styles.metaLbl}>Live now</span>
           </div>
           <div className={styles.metaDiv}/>
