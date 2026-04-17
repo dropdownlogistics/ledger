@@ -490,7 +490,10 @@ function GeneralizationSection() {
           </div>
         ))}
       </div>
-      <a href="/coming-soon" className={styles.genLink}>View all verticals →</a>
+      <div className={styles.genLinks}>
+        <a href="/coming-soon" className={styles.genLink}>View all verticals →</a>
+        <a href="/stack" className={styles.genLink}>View the Stack →</a>
+      </div>
     </section>
   )
 }
