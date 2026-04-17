@@ -215,7 +215,7 @@ function Hero() {
           </p>
           <div className={styles.heroActions}>
             <a href="#card" className={styles.btnPrimary}>See the card →</a>
-            <a href="#how" className={styles.btnSecondary}>How it works</a>
+            <a href="/how-it-works" className={styles.btnSecondary}>How it works</a>
           </div>
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
